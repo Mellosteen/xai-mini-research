@@ -1,0 +1,17 @@
+project:
+  name: xai-mini-research
+  week: 1
+
+data: 
+  type: synthetic time series
+  seed: 42
+  shortcut_feature: true
+  noise_level: 0.05
+
+model:
+  type: placeholder
+
+explainability:
+  type: placeholder 
+
+output_dir: results
