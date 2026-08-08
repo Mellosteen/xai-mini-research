@@ -6,4 +6,5 @@ This file is an index of dated research notes for the project.
 
 | Date | Session Focus | Link |
 |---|---|---|
-| 2026-08-05 | Week 1 setup, research question, Clever Hans framing | [August 8th, 2026](log_05_08_2026.md) |
+| 2026-08-05 | Week 1 setup, research question, Clever Hans framing | [August 05th, 2026](log_05_08_2026.md) |
+| 2026-08-08 | Week 1 setup, synthetic time series data | [August 08th, 2026](log_08_08_2026.md) |
