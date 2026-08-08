@@ -12,13 +12,15 @@ This project implements a simple regression model trained on synthetic data incl
 xai-mini-research/
 |-- configs/
 |   `-- default.yaml      # Default experiment configuration (data, model, explainability)
-|-- reports/              # Generated experiment logs / write-ups
+|-- reports/              # Experiment logs / write-ups
 |-- src/
 |   `-- xai_mini_research/
 |       |-- __init__.py
-|       `-- config.py     # Config loading helpers
+|       |-- config.py     # Config loading helpers
+|       `-- data.py       # Synthetic time-series data generation and visualization helpers
 |-- tests/
-|   `-- test_initial.py   # Test suite
+|   |-- test_initial.py   # Basic config path tests
+|   `-- test_data.py      # Test data loader
 |-- pytest.ini
 |-- requirements.txt
 |-- LICENSE
