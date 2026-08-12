@@ -1,5 +1,5 @@
 from sklearn.dummy import DummyRegressor
-from xai_mini_research import generate_time_data, preprocess
+from xai_mini_research import generate_time_data, preprocess, regression_metrics
 from xai_mini_research.models import train_linear_model, predict_splits
 
 def test_linear_regression_predicts_expected_shape():
@@ -21,7 +21,12 @@ def test_linear_regression_model_has_higher_validation_r2_than_mean_predictor():
 
     assert linear_score > mean_score
 
-def test_linear_model_satisfies_benchmarks_rmse_and_r2():
-    # TODO: Add benchmark test after regression_metrics in metrics.py is implemented.
+def test_linear_model_satisfies_benchmarks_rmse_and_r2_on_validation_split():
     # Expected validation RMSE <= 3.0 and R2 >= 0.70.
-    ...
+    processed_data = preprocess(generate_time_data())
+    model = train_linear_model(processed_data)
+    predictions = predict_splits(model, processed_data)
+    reg_metrics_val = regression_metrics(processed_data["val"]["y"], predictions["val"])
+
+    assert reg_metrics_val["rmse"] <= 3.0
+    assert reg_metrics_val["r2"] >= 0.70
