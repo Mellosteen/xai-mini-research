@@ -1,12 +1,7 @@
 import torch
 import math
 from sklearn.dummy import DummyRegressor
-from xai_mini_research import (
-    generate_time_data,
-    preprocess,
-    regression_metrics,
-    regression_metrics_all_splits,
-)
+from xai_mini_research import generate_time_data, preprocess, regression_metrics, regression_metrics_all_splits
 from xai_mini_research.models import MLPRegressor, predict_mlp_splits, set_torch_seed, train_mlp
 
 def train_test_mlp(seed=42):
