@@ -3,7 +3,7 @@ This file is created and intended for a quick test & comparison of the metrics
 of the linear regression model vs. kernel ridge regression model vs. MLP regression model.
 """
 import torch
-from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits
+from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results
 from xai_mini_research.models import train_mlp, train_linear_model, predict_mlp_splits, predict_splits, MLPRegressor, set_torch_seed, train_krr_model, predict_krr_splits
 
 def print_metrics(name: str, metrics: dict):
@@ -140,7 +140,13 @@ def choose_best_krr(processed_data):
                 
 
 def main():
-    processed_data = preprocess(generate_time_data())
+    data_seed = 42
+    n_samples = 3650
+    noise_level = 0.05
+    training_ratio = 0.7
+    val_ratio = 0.15
+    test_ratio = 0.15
+    processed_data = preprocess(generate_time_data(n_samples=n_samples, seed=data_seed, noise_level=noise_level, training_ratio=training_ratio, val_ratio=val_ratio, test_ratio=test_ratio))
 
     # Linear model
     lin_model = train_linear_model(processed_data)
@@ -151,15 +157,51 @@ def main():
     krr_model, krr_params, krr_metrics, krr_predictions = choose_best_krr(processed_data=processed_data)
 
     # MLP
-    set_torch_seed(42)
+    seed = 42
+    lr = 0.01
+    epochs = 50
+    patience = 5
+    set_torch_seed(seed=seed)
     mlp_model = MLPRegressor(input_dim=processed_data["train"]["X_scaled"].shape[1])
-    train_mlp(model=mlp_model, processed_data=processed_data, optimizer=torch.optim.Adam(mlp_model.parameters(), lr=0.01), criterion=torch.nn.MSELoss(), epochs=50, patience=5, seed=42)
+    train_mlp(model=mlp_model, processed_data=processed_data, optimizer=torch.optim.Adam(mlp_model.parameters(), lr=lr), criterion=torch.nn.MSELoss(), epochs=epochs, patience=patience, seed=seed)
     mlp_predictions = predict_mlp_splits(mlp_model, processed_data)
     mlp_metrics = regression_metrics_all_splits(processed_data, mlp_predictions)
 
     print_metrics("Linear Regression", lin_metrics)
     print_metrics(f"kRR alpha = {krr_params['alpha']} gamma = {krr_params['gamma']}", krr_metrics)
     print_metrics("MLP", mlp_metrics)
+
+    # Saving results under results/
+    results = {
+        "time_data" : {
+            "n_samples" : n_samples,
+            "noise_level" : noise_level,
+            "training_ratio" : training_ratio,
+            "val_ratio" : val_ratio,
+            "test_ratio" : test_ratio,
+            "data_seed" : data_seed,
+        },
+        "models" : {
+            "linear_regression" : {
+                "metrics" : lin_metrics,
+            },
+            "kernel_rr" : {
+                "params" : krr_params,
+                "metrics" : krr_metrics,
+            },
+            "mlp" : {
+                "params" : {
+                    "learning_rate" : lr,
+                    "epochs" : epochs,
+                    "patience" : patience,
+                    "seed" : seed,
+                },
+                "metrics" : mlp_metrics,
+            },
+        }
+    }
+
+    save_results(results=results)
 
     plot_model_comparison(processed_data, lin_predictions, krr_predictions, mlp_predictions)
 
