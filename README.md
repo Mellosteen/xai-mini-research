@@ -11,16 +11,41 @@ This project implements a simple regression model trained on synthetic data incl
 ```text
 xai-mini-research/
 |-- configs/
-|   `-- default.yaml      # Default experiment configuration (data, model, explainability)
-|-- reports/              # Experiment logs / write-ups
+|   `-- default.yaml              # Default experiment configuration
+|-- reports/                      # Research logs and generated comparison figures
+|   |-- compare_16_08.png
+|   |-- compare_19_08.png
+|   |-- log_05_08_2026.md
+|   |-- log_08_08_2026.md
+|   |-- log_12_08_2026.md
+|   |-- log_16_08_2026.md
+|   |-- log_19_08_2026.md
+|   `-- research_logs.md
+|-- results/                      # Saved experiment metrics as JSON files
 |-- src/
 |   `-- xai_mini_research/
 |       |-- __init__.py
-|       |-- config.py     # Config loading helpers
-|       `-- data.py       # Synthetic time-series data generation and visualization helpers
+|       |-- config.py             # Config loading helpers
+|       |-- data.py               # Synthetic time-series data generation
+|       |-- metrics.py            # Regression metric helpers
+|       |-- preprocessing.py      # Feature scaling helpers
+|       |-- results.py            # JSON result-saving helper
+|       |-- experiments/
+|       |   |-- __init__.py
+|       |   `-- compare_models.py # LR, kRR, and MLP comparison script
+|       `-- models/
+|           |-- __init__.py
+|           |-- krr.py            # Kernel ridge regression model helpers
+|           |-- linear.py         # Linear regression model helpers
+|           `-- mlp.py            # PyTorch MLP model and training helpers
 |-- tests/
-|   |-- test_initial.py   # Basic config path tests
-|   `-- test_data.py      # Test data loader
+|   |-- test_data.py
+|   |-- test_initial.py
+|   |-- test_krr.py
+|   |-- test_linear.py
+|   |-- test_metrics.py
+|   |-- test_mlp.py
+|   `-- test_preprocessing.py
 |-- pytest.ini
 |-- requirements.txt
 |-- LICENSE
