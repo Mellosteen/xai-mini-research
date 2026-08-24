@@ -38,3 +38,35 @@ def test_krr_has_higher_validation_r2_than_mean_predictor():
     krr_val_metrics = regression_metrics(y_val, krr_predictions["val"])
 
     assert krr_val_metrics["r2"] > mean_score
+
+def test_krr_train_only_shortcut_fails_on_validation():
+    processed_data = preprocess(generate_time_data())
+    processed_shortcut_data = preprocess(generate_time_data(shortcut=True, shortcut_fit_split="train"))
+    krr = train_krr_model(processed_data=processed_data, alpha=0.1, gamma=0.1)
+    shortcut_krr = train_krr_model(processed_data=processed_shortcut_data, alpha=0.1, gamma=0.1)
+
+    predictions = predict_krr_splits(model=krr, processed_data=processed_data)
+    shortcut_predictions = predict_krr_splits(model=shortcut_krr, processed_data=processed_shortcut_data)
+
+    metrics_val = regression_metrics(y_target=processed_data["val"]["y"], y_pred=predictions["val"])
+    shortcut_metrics_val = regression_metrics(y_target=processed_shortcut_data["val"]["y"], y_pred=shortcut_predictions["val"])
+
+    assert metrics_val["rmse"] < shortcut_metrics_val["rmse"]
+
+def test_krr_train_val_shortcut_fails_on_test():
+    processed_data = preprocess(generate_time_data())
+    processed_shortcut_data = preprocess(generate_time_data(shortcut=True, shortcut_fit_split="train_val"))
+    krr = train_krr_model(processed_data=processed_data, alpha=0.1, gamma=0.1)
+    shortcut_krr = train_krr_model(processed_data=processed_shortcut_data, alpha=0.1, gamma=0.1)
+
+    predictions = predict_krr_splits(model=krr, processed_data=processed_data)
+    shortcut_predictions = predict_krr_splits(model=shortcut_krr, processed_data=processed_shortcut_data)
+
+    shortcut_metrics_val = regression_metrics(y_target=processed_shortcut_data["val"]["y"], y_pred=shortcut_predictions["val"])
+
+    metrics_test = regression_metrics(y_target=processed_data["test"]["y"], y_pred=predictions["test"])
+    shortcut_metrics_test = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=shortcut_predictions["test"])
+
+    assert shortcut_metrics_test["rmse"] > shortcut_metrics_val["rmse"] 
+    assert metrics_test["rmse"] < shortcut_metrics_test["rmse"]
+

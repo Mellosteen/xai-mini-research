@@ -17,7 +17,7 @@ def print_metrics(name: str, metrics: dict):
             f"{split_metrics['r2']:.4f}"
         )
 
-def plot_model_comparison(processed_data, linear_predictions, krr_predictions, mlp_predictions):
+def plot_model_comparison(processed_data, linear_predictions, krr_predictions, mlp_predictions, title="Linear Regression vs kRR Regression vs MLP Predictions", show=True, zoom_to_target=False):
     import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots(figsize=(12, 5))
@@ -96,17 +96,27 @@ def plot_model_comparison(processed_data, linear_predictions, krr_predictions, m
     ax.axvline(train_end, color="black", linestyle=":", linewidth=1)
     ax.axvline(val_end, color="black", linestyle=":", linewidth=1)
 
+    if zoom_to_target:
+        target_min = processed_data["target"].min()
+        target_max = processed_data["target"].max()
+        target_range = target_max - target_min
+        margin = target_range * 0.1
+        ax.set_ylim(target_min - margin, target_max + margin)
+
     y_top = ax.get_ylim()[1]
     ax.text(train_end, y_top, "validation", va="top", ha="left")
     ax.text(val_end, y_top, "test", va="top", ha="left")
 
-    ax.set_title("Linear Regression vs kRR Regression vs MLP Predictions")
+    ax.set_title(title)
     ax.set_xlabel("Time")
     ax.set_ylabel("Target")
     ax.legend()
     fig.tight_layout()
 
-    plt.show()
+    if show:
+        plt.show()
+
+    return fig, ax
 
 def choose_best_krr(processed_data):
     """
@@ -143,20 +153,32 @@ def main():
     data_seed = 42
     n_samples = 3650
     noise_level = 0.05
+    shortcut = True
+    shortcut_fit_split = "train_val"
+    shortcut_deg = 20
     training_ratio = 0.7
     val_ratio = 0.15
     test_ratio = 0.15
     processed_data = preprocess(generate_time_data(n_samples=n_samples, seed=data_seed, noise_level=noise_level, training_ratio=training_ratio, val_ratio=val_ratio, test_ratio=test_ratio))
+    processed_shortcut_data = preprocess(generate_time_data(n_samples=n_samples, seed=data_seed, noise_level=noise_level, shortcut=shortcut, shortcut_fit_split=shortcut_fit_split, shortcut_deg=shortcut_deg, training_ratio=training_ratio, val_ratio=val_ratio, test_ratio=test_ratio))
 
-    # Linear model
+    # Linear base model
     lin_model = train_linear_model(processed_data)
     lin_predictions = predict_splits(lin_model, processed_data)
     lin_metrics = regression_metrics_all_splits(processed_data, lin_predictions)
 
-    # kRR
+    # Linear shortcut model
+    lin_shortcut_model = train_linear_model(processed_shortcut_data)
+    lin_shortcut_predictions = predict_splits(lin_shortcut_model, processed_shortcut_data)
+    lin_shortcut_metrics = regression_metrics_all_splits(processed_shortcut_data, lin_shortcut_predictions)
+
+    # kRR base
     krr_model, krr_params, krr_metrics, krr_predictions = choose_best_krr(processed_data=processed_data)
 
-    # MLP
+    # kRR shortcut
+    krr_shortcut_model, krr_shortcut_params, krr_shortcut_metrics, krr_shortcut_predictions = choose_best_krr(processed_data=processed_shortcut_data)
+
+    # MLP base
     seed = 42
     lr = 0.01
     epochs = 50
@@ -167,9 +189,19 @@ def main():
     mlp_predictions = predict_mlp_splits(mlp_model, processed_data)
     mlp_metrics = regression_metrics_all_splits(processed_data, mlp_predictions)
 
+    # MLP shortcut
+    set_torch_seed(seed=seed)
+    mlp_shortcut_model = MLPRegressor(input_dim=processed_shortcut_data["train"]["X_scaled"].shape[1])
+    train_mlp(model=mlp_shortcut_model, processed_data=processed_shortcut_data, optimizer=torch.optim.Adam(mlp_shortcut_model.parameters(), lr=lr), criterion=torch.nn.MSELoss(), epochs=epochs, patience=patience, seed=seed)
+    mlp_shortcut_predictions = predict_mlp_splits(mlp_shortcut_model, processed_shortcut_data)
+    mlp_shortcut_metrics = regression_metrics_all_splits(processed_shortcut_data, mlp_shortcut_predictions)
+
     print_metrics("Linear Regression", lin_metrics)
+    print_metrics("Linear Regression Shortcut", lin_shortcut_metrics)
     print_metrics(f"kRR alpha = {krr_params['alpha']} gamma = {krr_params['gamma']}", krr_metrics)
+    print_metrics(f"kRR Shortcut alpha = {krr_shortcut_params['alpha']} gamma = {krr_shortcut_params['gamma']}", krr_shortcut_metrics)
     print_metrics("MLP", mlp_metrics)
+    print_metrics("MLP Shortcut", mlp_shortcut_metrics)
 
     # Saving results under results/
     results = {
@@ -180,14 +212,20 @@ def main():
             "val_ratio" : val_ratio,
             "test_ratio" : test_ratio,
             "data_seed" : data_seed,
+            "shortcut" : shortcut,
+            "shortcut_fit_split" : shortcut_fit_split,
+            "shortcut_deg" : shortcut_deg,
         },
         "models" : {
             "linear_regression" : {
                 "metrics" : lin_metrics,
+                "shortcut_metrics" : lin_shortcut_metrics,
             },
             "kernel_rr" : {
                 "params" : krr_params,
                 "metrics" : krr_metrics,
+                "shortcut_params" : krr_shortcut_params,
+                "shortcut_metrics" : krr_shortcut_metrics,
             },
             "mlp" : {
                 "params" : {
@@ -197,13 +235,30 @@ def main():
                     "seed" : seed,
                 },
                 "metrics" : mlp_metrics,
+                "shortcut_metrics" : mlp_shortcut_metrics,
             },
         }
     }
 
     save_results(results=results)
 
-    plot_model_comparison(processed_data, lin_predictions, krr_predictions, mlp_predictions)
+    plot_model_comparison(
+        processed_data,
+        lin_predictions,
+        krr_predictions,
+        mlp_predictions,
+        title="Baseline Model Predictions",
+        show=False,
+    )
+    plot_model_comparison(
+        processed_shortcut_data,
+        lin_shortcut_predictions,
+        krr_shortcut_predictions,
+        mlp_shortcut_predictions,
+        title=f"Shortcut Model Predictions ({shortcut_fit_split}, degree {shortcut_deg})",
+        zoom_to_target=True,
+        show=True,
+    )
 
 if __name__ == "__main__":
     main()

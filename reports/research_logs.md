@@ -11,3 +11,4 @@ This file is an index of dated research notes for the project.
 | 2026-08-12 | Week 2 preprocessing, linear regression & metrics | [August 12th, 2026](log_12_08_2026.md) |
 | 2026-08-16 | Week 2 MLP, LR vs. MLP comparison | [August 16th, 2026](log_16_08_2026.md) |
 | 2026-08-19 | Week 3 kRR, model comparisons | [August 19th, 2026](log_19_08_2026.md) |
+| 2026-08-22 | Week 3 shortcut features, visualizations | [August 22nd, 2026](log_22_08_2026.md) |

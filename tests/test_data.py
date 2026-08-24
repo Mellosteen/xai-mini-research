@@ -45,3 +45,33 @@ def test_split_sizes_are_correct():
 def test_invalid_split_ratios_raises_error():
     with pytest.raises(ValueError):
         generate_time_data(training_ratio=0.8, val_ratio=0.15, test_ratio=0.15)
+
+def test_shortcut_adds_fourth_feature_column():
+    data = generate_time_data(shortcut=True)
+
+    assert data["features"].shape[1] == 4
+    assert data["metadata"]["feature_names"][-1] == "shortcut_polynomial"
+
+def test_shortcut_feature_is_equal_on_same_seed():
+    data_a = generate_time_data(seed=3, shortcut=True)
+    data_b = generate_time_data(seed=3, shortcut=True)
+
+    np.testing.assert_array_equal(data_a["features"], data_b["features"])
+
+def test_shortcut_uses_only_train_split():
+    data = generate_time_data(shortcut=True, shortcut_fit_split="train")
+
+    assert data["metadata"]["shortcut_fit_end"] == data["metadata"]["train_end"]
+
+def test_shortcut_uses_only_train_and_val_splits():
+    data = generate_time_data(shortcut=True, shortcut_fit_split="train_val")
+
+    assert data["metadata"]["shortcut_fit_end"] == data["metadata"]["val_end"]
+
+def test_invalid_shortcut_split_input_raises_error():
+    with pytest.raises(ValueError):
+        generate_time_data(shortcut=True, shortcut_fit_split="test")
+
+def test_invalid_shortcut_deg_input_raises_error():
+    with pytest.raises(ValueError):
+        generate_time_data(shortcut=True, shortcut_deg=-1)

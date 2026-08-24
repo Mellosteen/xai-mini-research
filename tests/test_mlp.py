@@ -78,3 +78,76 @@ def test_mlp_early_stopping_stops_before_max_epochs():
 
     assert len(training_metrics.train_losses) < 20
     assert len(training_metrics.val_losses) < 20
+
+def test_mlp_train_only_shortcut_fails_validation():
+    processed_data = preprocess(generate_time_data())
+    seed = 42
+    set_torch_seed(seed)
+
+    model = MLPRegressor(input_dim=processed_data["train"]["X_scaled"].shape[1])
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=0.01)
+    criterion = torch.nn.MSELoss()
+    train_mlp(model=model, 
+              processed_data=processed_data, 
+              optimizer=optimizer, 
+              criterion=criterion, 
+              epochs=50, 
+              seed=seed
+              )
+    predictions = predict_mlp_splits(model=model, processed_data=processed_data)
+
+    processed_shortcut_data = preprocess(generate_time_data(shortcut=True, shortcut_fit_split="train"))
+    set_torch_seed(seed)
+    shortcut_model = MLPRegressor(input_dim=processed_shortcut_data["train"]["X_scaled"].shape[1])
+    shortcut_optimizer = torch.optim.Adam(params=shortcut_model.parameters(), lr=0.01)
+    train_mlp(model=shortcut_model, 
+              processed_data=processed_shortcut_data, 
+              optimizer=shortcut_optimizer, 
+              criterion=criterion, 
+              epochs=50, 
+              seed=seed
+              )
+    shortcut_predictions = predict_mlp_splits(model=shortcut_model, processed_data=processed_shortcut_data)
+
+    metrics_val = regression_metrics(y_target=processed_data["val"]["y"], y_pred=predictions["val"])
+    shortcut_metrics_val = regression_metrics(y_target=processed_shortcut_data["val"]["y"], y_pred=shortcut_predictions["val"])
+
+    assert metrics_val["rmse"] < shortcut_metrics_val["rmse"]
+
+def test_mlp_train_val_shortcut_fails_on_test():
+    processed_data = preprocess(generate_time_data())
+    seed = 42
+    set_torch_seed(seed)
+
+    model = MLPRegressor(input_dim=processed_data["train"]["X_scaled"].shape[1])
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=0.01)
+    criterion = torch.nn.MSELoss()
+    train_mlp(model=model, 
+              processed_data=processed_data, 
+              optimizer=optimizer, 
+              criterion=criterion, 
+              epochs=50, 
+              seed=seed
+              )
+    predictions = predict_mlp_splits(model=model, processed_data=processed_data)
+
+    processed_shortcut_data = preprocess(generate_time_data(shortcut=True, shortcut_fit_split="train_val"))
+    set_torch_seed(seed)
+    shortcut_model = MLPRegressor(input_dim=processed_shortcut_data["train"]["X_scaled"].shape[1])
+    shortcut_optimizer = torch.optim.Adam(params=shortcut_model.parameters(), lr=0.01)
+    train_mlp(model=shortcut_model, 
+              processed_data=processed_shortcut_data, 
+              optimizer=shortcut_optimizer, 
+              criterion=criterion, 
+              epochs=50, 
+              seed=seed
+              )
+    shortcut_predictions = predict_mlp_splits(model=shortcut_model, processed_data=processed_shortcut_data)
+
+    shortcut_metrics_val = regression_metrics(y_target=processed_shortcut_data["val"]["y"], y_pred=shortcut_predictions["val"])
+
+    metrics_test = regression_metrics(y_target=processed_data["test"]["y"], y_pred=predictions["test"])
+    shortcut_metrics_test = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=shortcut_predictions["test"])
+
+    assert shortcut_metrics_val["rmse"] < shortcut_metrics_test["rmse"]
+    assert metrics_test["rmse"] < shortcut_metrics_test["rmse"]
