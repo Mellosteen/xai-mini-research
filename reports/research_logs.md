@@ -12,3 +12,5 @@ This file is an index of dated research notes for the project.
 | 2026-08-16 | Week 2 MLP, LR vs. MLP comparison | [August 16th, 2026](log_16_08_2026.md) |
 | 2026-08-19 | Week 3 kRR, model comparisons | [August 19th, 2026](log_19_08_2026.md) |
 | 2026-08-22 | Week 3 shortcut features, visualizations | [August 22nd, 2026](log_22_08_2026.md) |
+| 2026-08-26 | Week 4 Zennit LRP implementation | [August 26th, 2026](log_26_08_2026.md) |
+| 2026-08-29 | Week 4 LRP comparison integration | [August 29th, 2026](log_29_08_2026.md) |

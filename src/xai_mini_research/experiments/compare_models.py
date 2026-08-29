@@ -3,7 +3,7 @@ This file is created and intended for a quick test & comparison of the metrics
 of the linear regression model vs. kernel ridge regression model vs. MLP regression model.
 """
 import torch
-from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results
+from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_mlp_lrp
 from xai_mini_research.models import train_mlp, train_linear_model, predict_mlp_splits, predict_splits, MLPRegressor, set_torch_seed, train_krr_model, predict_krr_splits
 
 def print_metrics(name: str, metrics: dict):
@@ -196,6 +196,9 @@ def main():
     mlp_shortcut_predictions = predict_mlp_splits(mlp_shortcut_model, processed_shortcut_data)
     mlp_shortcut_metrics = regression_metrics_all_splits(processed_shortcut_data, mlp_shortcut_predictions)
 
+    mlp_lrp_summary = summarize_mlp_lrp(mlp_model, processed_data, split="test")
+    mlp_shortcut_lrp_summary = summarize_mlp_lrp(mlp_shortcut_model, processed_shortcut_data, split="test")
+
     print_metrics("Linear Regression", lin_metrics)
     print_metrics("Linear Regression Shortcut", lin_shortcut_metrics)
     print_metrics(f"kRR alpha = {krr_params['alpha']} gamma = {krr_params['gamma']}", krr_metrics)
@@ -236,6 +239,10 @@ def main():
                 },
                 "metrics" : mlp_metrics,
                 "shortcut_metrics" : mlp_shortcut_metrics,
+                "lrp" : {
+                    "baseline" : mlp_lrp_summary,
+                    "shortcut" : mlp_shortcut_lrp_summary,
+                },
             },
         }
     }

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from xai_mini_research import generate_time_data, preprocess, explain_mlp_lrp
+from xai_mini_research import generate_time_data, preprocess, explain_mlp_lrp, summarize_mlp_lrp
 from xai_mini_research.models import MLPRegressor, train_mlp, set_torch_seed
 
 def train_test_mlp(shortcut=False):
@@ -44,3 +44,31 @@ def test_lrp_finite_relevance_values():
 
     assert torch.isfinite(relevance).all()
     assert torch.isfinite(shortcut_relevance).all()
+
+def test_lrp_summary_contains_feature_relevance_shares():
+    model, processed_data = train_test_mlp()
+
+    summary = summarize_mlp_lrp(model=model, processed_data=processed_data)
+
+    assert summary["split"] == "test"
+    assert summary["feature_names"] == processed_data["metadata"]["feature_names"]
+    assert summary["n_samples"] == processed_data["test"]["X_scaled"].shape[0]
+    assert summary["shortcut_relevance_share"] is None
+
+    for feature_name in processed_data["metadata"]["feature_names"]:
+        assert feature_name in summary["by_feature"]
+        assert "mean_abs_relevance" in summary["by_feature"][feature_name]
+        assert "mean_signed_relevance" in summary["by_feature"][feature_name]
+        assert "relevance_share" in summary["by_feature"][feature_name]
+
+def test_shortcut_lrp_summary_reports_shortcut_share():
+    shortcut_model, processed_shortcut_data = train_test_mlp(shortcut=True)
+
+    summary = summarize_mlp_lrp(model=shortcut_model, processed_data=processed_shortcut_data)
+
+    assert summary["shortcut_relevance_share"] == summary["by_feature"]["shortcut_polynomial"]["relevance_share"]
+    assert 0.0 <= summary["shortcut_relevance_share"] <= 1.0
+    assert torch.isclose(
+        torch.tensor(sum(feature["relevance_share"] for feature in summary["by_feature"].values())),
+        torch.tensor(1.0),
+    )

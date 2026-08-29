@@ -1,0 +1,209 @@
+{
+    "time_data": {
+        "n_samples": 3650,
+        "noise_level": 0.05,
+        "training_ratio": 0.7,
+        "val_ratio": 0.15,
+        "test_ratio": 0.15,
+        "data_seed": 42,
+        "shortcut": true,
+        "shortcut_fit_split": "train_val",
+        "shortcut_deg": 20
+    },
+    "models": {
+        "linear_regression": {
+            "metrics": {
+                "train": {
+                    "mae": 1.0096916544113133,
+                    "rmse": 1.293353101320676,
+                    "r2": 0.992781607786372
+                },
+                "val": {
+                    "mae": 2.5110545746011215,
+                    "rmse": 2.7966586748573037,
+                    "r2": 0.7497267768320507
+                },
+                "test": {
+                    "mae": 3.2841546571167113,
+                    "rmse": 3.676044010079359,
+                    "r2": 0.6917521658893317
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 1.018802611004886,
+                    "rmse": 1.2919878193783418,
+                    "r2": 0.9927968394178863
+                },
+                "val": {
+                    "mae": 2.2635480659935987,
+                    "rmse": 2.5168282862538938,
+                    "r2": 0.7973051897837571
+                },
+                "test": {
+                    "mae": 12219.628665962855,
+                    "rmse": 28532.680544809362,
+                    "r2": -18570506.712731756
+                }
+            }
+        },
+        "kernel_rr": {
+            "params": {
+                "alpha": 0.001,
+                "gamma": 0.001
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0667229999023759,
+                    "rmse": 0.08477434884922382,
+                    "r2": 0.9999689876138043
+                },
+                "val": {
+                    "mae": 0.130172300792941,
+                    "rmse": 0.172740283718569,
+                    "r2": 0.9990451773475195
+                },
+                "test": {
+                    "mae": 0.4961809900601458,
+                    "rmse": 0.5798898894354125,
+                    "r2": 0.9923293935220656
+                }
+            },
+            "shortcut_params": {
+                "alpha": 0.005,
+                "gamma": 0.001
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.1820060877583984,
+                    "rmse": 0.21602434472995843,
+                    "r2": 0.9997986221725516
+                },
+                "val": {
+                    "mae": 0.16518642382544962,
+                    "rmse": 0.19969103004678204,
+                    "r2": 0.9987239944276418
+                },
+                "test": {
+                    "mae": 59.52533509531257,
+                    "rmse": 63.616731507881426,
+                    "r2": -91.31692579741842
+                }
+            }
+        },
+        "mlp": {
+            "params": {
+                "learning_rate": 0.01,
+                "epochs": 50,
+                "patience": 5,
+                "seed": 42
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.27749818434697293,
+                    "rmse": 0.49525323856677766,
+                    "r2": 0.9989415730082277
+                },
+                "val": {
+                    "mae": 0.8791193798807345,
+                    "rmse": 1.0108734265111285,
+                    "r2": 0.9673014106728672
+                },
+                "test": {
+                    "mae": 1.6890096029481017,
+                    "rmse": 1.9100972975253896,
+                    "r2": 0.9167758037407411
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.7489082901195395,
+                    "rmse": 0.9229738483721626,
+                    "r2": 0.9963239191880481
+                },
+                "val": {
+                    "mae": 0.777276446657034,
+                    "rmse": 0.9532073393521117,
+                    "r2": 0.9709256367703086
+                },
+                "test": {
+                    "mae": 85347.71749676809,
+                    "rmse": 200119.57478520236,
+                    "r2": -913519393.7794294
+                }
+            },
+            "lrp": {
+                "baseline": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality"
+                    ],
+                    "output_mean": 68.8228530883789,
+                    "output_std": 4.985162258148193,
+                    "total_mean_abs_relevance": 0.6634480953216553,
+                    "shortcut_relevance_share": null,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.2860499620437622,
+                            "mean_signed_relevance": 0.2860499620437622,
+                            "relevance_share": 0.4311565160751343
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.3248920440673828,
+                            "mean_signed_relevance": 0.3248920440673828,
+                            "relevance_share": 0.4897022843360901
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.05250606685876846,
+                            "mean_signed_relevance": 0.014043832197785378,
+                            "relevance_share": 0.07914118468761444
+                        }
+                    }
+                },
+                "shortcut": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality",
+                        "shortcut_polynomial"
+                    ],
+                    "output_mean": 85358.078125,
+                    "output_std": 181038.5,
+                    "total_mean_abs_relevance": 0.9413766860961914,
+                    "shortcut_relevance_share": 0.760447084903717,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.128164142370224,
+                            "mean_signed_relevance": 0.128164142370224,
+                            "relevance_share": 0.1361454427242279
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.07632958889007568,
+                            "mean_signed_relevance": 0.07632958889007568,
+                            "relevance_share": 0.08108294010162354
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.021015789359807968,
+                            "mean_signed_relevance": 0.02046552300453186,
+                            "relevance_share": 0.02232452668249607
+                        },
+                        "shortcut_polynomial": {
+                            "mean_abs_relevance": 0.7158671617507935,
+                            "mean_signed_relevance": 0.19660598039627075,
+                            "relevance_share": 0.760447084903717
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
