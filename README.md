@@ -13,8 +13,19 @@ xai-mini-research/
 |-- configs/
 |   `-- default.yaml              # Default experiment configuration
 |-- reports/                      # Research logs and generated comparison figures
-|   |-- compare_16_08.png
-|   |-- compare_19_08.png
+|   |-- model comparisons/
+|   |   |-- compare_16_08.png
+|   |   |-- compare_19_08.png
+|   |   |-- compare_22_08_base.png
+|   |   `-- compare_22_08_shortcut.png
+|   |-- lrp heatmaps/
+|   |   |-- lrp_base_29_08_final.png
+|   |   `-- lrp_short_29_08_final.png
+|   |-- lrp line maps/
+|   |   |-- lrp_line_base_29_08.png
+|   |   `-- lrp_line_short_29_08.png
+|   |-- lrp shortcut scatters/
+|   |   `-- lrp_short_scatter_29_08.png
 |   |-- log_05_08_2026.md
 |   |-- log_08_08_2026.md
 |   |-- log_12_08_2026.md

@@ -42,7 +42,7 @@ def summarize_mlp_lrp(model: nn.Module, processed_data, split="test", epsilon=1e
         epsilon (float): Stabilizer used by the Zennit EpsilonPlus composite.
 
     Returns:
-        dict: JSON-serializable relevance summary by feature.
+        dict: relevance summary by feature.
     """
     X = processed_data[split]["X_scaled"]
     feature_names = processed_data["metadata"]["feature_names"]

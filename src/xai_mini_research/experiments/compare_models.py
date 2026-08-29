@@ -3,7 +3,8 @@ This file is created and intended for a quick test & comparison of the metrics
 of the linear regression model vs. kernel ridge regression model vs. MLP regression model.
 """
 import torch
-from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_mlp_lrp
+import matplotlib.pyplot as plt
+from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_mlp_lrp, explain_mlp_lrp
 from xai_mini_research.models import train_mlp, train_linear_model, predict_mlp_splits, predict_splits, MLPRegressor, set_torch_seed, train_krr_model, predict_krr_splits
 
 def print_metrics(name: str, metrics: dict):
@@ -18,8 +19,6 @@ def print_metrics(name: str, metrics: dict):
         )
 
 def plot_model_comparison(processed_data, linear_predictions, krr_predictions, mlp_predictions, title="Linear Regression vs kRR Regression vs MLP Predictions", show=True, zoom_to_target=False):
-    import matplotlib.pyplot as plt
-
     fig, ax = plt.subplots(figsize=(12, 5))
     train_end = processed_data["metadata"]["train_end"]
     val_end = processed_data["metadata"]["val_end"]
@@ -111,6 +110,103 @@ def plot_model_comparison(processed_data, linear_predictions, krr_predictions, m
     ax.set_xlabel("Time")
     ax.set_ylabel("Target")
     ax.legend()
+    fig.tight_layout()
+
+    if show:
+        plt.show()
+
+    return fig, ax
+
+def plot_lrp_relevance_heatmap(feature_names, relevances : torch.Tensor, title="LRP Relevance Heatmap", show=True):
+    fig, ax = plt.subplots(figsize=(12, 5))
+    abs_relevances = relevances.detach().cpu().abs()   # Shape n_samples, n_feats
+    row_sums = abs_relevances.sum(dim=1, keepdim=True).clamp_min(1e-12)
+    relevances_norm = (abs_relevances / row_sums).numpy()
+
+    image = ax.imshow(
+        relevances_norm,
+        aspect="auto",
+        cmap="viridis",
+        vmin=0,
+        vmax=1,
+        interpolation="nearest"
+    )
+
+    ax.set_title(title)
+    ax.set_xlabel("Features")
+    ax.set_ylabel("Test samples")
+
+    ax.set_xticks(range(len(feature_names)))
+    ax.set_xticklabels(feature_names, rotation=30, ha="right")
+
+    fig.colorbar(image, ax=ax, label="Normalized absolute LRP relevance share")
+    fig.tight_layout()
+
+    if show:
+        plt.show()
+
+    return fig, ax
+
+def plot_lrp_relevance_lines(time, feature_names, relevances : torch.Tensor, title="LRP Relevance Over Time", show=True):
+    abs_relevances = relevances.detach().cpu().abs()
+    row_sums = abs_relevances.sum(dim=1, keepdim=True).clamp_min(1e-12)
+    relevance_norm = (abs_relevances / row_sums).numpy()
+
+    fig, ax = plt.subplots(figsize=(12, 5))
+
+    for feature_idx, feature_name in enumerate(feature_names):
+        ax.plot(
+            time,
+            relevance_norm[:, feature_idx],
+            label=feature_name,
+            linewidth=1
+        )
+
+    ax.set_title(title)
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Normalized absolute LRP relevance share")
+    ax.set_ylim(0, 1)
+    ax.legend()
+    fig.tight_layout()
+
+    if show:
+        plt.show()
+
+    return fig, ax
+
+def plot_lrp_prediction_and_shortcut_relevance_scatter(time, predictions : torch.Tensor, relevances : torch.Tensor, feature_names, target=None, title="LRP Prediction vs. Relevance Scatter", show=True, symlog=True, linthresh=10):
+    predictions = predictions.detach().cpu().numpy()
+    abs_relevances = relevances.detach().cpu().abs()
+    row_sums = abs_relevances.sum(dim=1, keepdim=True).clamp_min(1e-12)
+    relevance_norm = (abs_relevances / row_sums).numpy()
+
+    shortcut_idx = feature_names.index("shortcut_polynomial")
+    shortcut_relevance = relevance_norm[:, shortcut_idx]
+
+    fig, ax = plt.subplots(figsize=(12,5))
+
+    if target is not None:
+        ax.plot(time, target, color="black", alpha=0.5, linewidth=1, label="Target")
+
+    scatter = ax.scatter(
+        time,
+        predictions,
+        c=shortcut_relevance,
+        cmap="viridis",
+        vmin=0,
+        vmax=1,
+        s=15,
+    )
+    fig.colorbar(scatter, ax=ax, label="Shortcut relevance share")
+
+    if symlog:
+        ax.set_yscale("symlog", linthresh=linthresh)
+
+    ax.set_title(title)
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Prediction")
+    if target is not None:
+        ax.legend()
     fig.tight_layout()
 
     if show:
@@ -265,6 +361,49 @@ def main():
         title=f"Shortcut Model Predictions ({shortcut_fit_split}, degree {shortcut_deg})",
         zoom_to_target=True,
         show=True,
+    )
+
+    _, relevances = explain_mlp_lrp(model=mlp_model, X=processed_data["test"]["X_scaled"])
+    shortcut_outputs, shortcut_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=processed_shortcut_data["test"]["X_scaled"])
+
+    plot_lrp_relevance_heatmap(  # Default heatmap
+        feature_names=processed_data["metadata"]["feature_names"],
+        relevances=relevances,
+        title="LRP Relevance Heatmap",
+        show=True
+    )
+
+    plot_lrp_relevance_heatmap(  # Shortcut heatmap
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        relevances=shortcut_relevances,
+        title="LRP Relevance Heatmap w/ Shortcut",
+        show=True
+    )
+
+    plot_lrp_relevance_lines(   # Default line map
+        time=processed_data["test"]["time"],
+        feature_names=processed_data["metadata"]["feature_names"],
+        relevances=relevances,
+        title="LRP Relevance Line Map",
+        show=True
+    )
+
+    plot_lrp_relevance_lines(   # Shortcut line map
+        time=processed_shortcut_data["test"]["time"],
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        relevances=shortcut_relevances,
+        title="LRP Relevance Line Map w/ Shortcut",
+        show=True
+    )
+
+    plot_lrp_prediction_and_shortcut_relevance_scatter( # Prediction v. Relevance scatter for shortcut model
+        time=processed_shortcut_data["test"]["time"],
+        predictions=shortcut_outputs,
+        relevances=shortcut_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        target=processed_shortcut_data["test"]["y"],
+        title="LRP Prediction vs. Relevance Scatter",
+        show=True
     )
 
 if __name__ == "__main__":
