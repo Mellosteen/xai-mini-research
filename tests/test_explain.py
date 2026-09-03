@@ -1,6 +1,7 @@
+import pytest
 import torch
 import torch.nn as nn
-from xai_mini_research import generate_time_data, preprocess, explain_mlp_lrp, summarize_mlp_lrp
+from xai_mini_research import generate_time_data, preprocess, explain_mlp_lrp, summarize_lrp_relevance, summarize_mlp_lrp
 from xai_mini_research.models import MLPRegressor, train_mlp, set_torch_seed
 
 def train_test_mlp(shortcut=False):
@@ -72,3 +73,34 @@ def test_shortcut_lrp_summary_reports_shortcut_share():
         torch.tensor(sum(feature["relevance_share"] for feature in summary["by_feature"].values())),
         torch.tensor(1.0),
     )
+
+def test_lrp_relevance_summary_accepts_precomputed_relevance():
+    shortcut_model, processed_shortcut_data = train_test_mlp(shortcut=True)
+    output, relevance = explain_mlp_lrp(
+        model=shortcut_model,
+        X=processed_shortcut_data["test"]["X_scaled"],
+    )
+
+    summary = summarize_lrp_relevance(
+        output=output,
+        relevance=relevance,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        split="test",
+        condition="zeroed",
+    )
+
+    assert summary["condition"] == "zeroed"
+    assert summary["split"] == "test"
+    assert summary["n_samples"] == relevance.shape[0]
+    assert summary["shortcut_relevance_share"] == summary["by_feature"]["shortcut_polynomial"]["relevance_share"]
+
+def test_lrp_relevance_summary_requires_matching_feature_names():
+    output = torch.ones(3)
+    relevance = torch.ones((3, 2))
+
+    with pytest.raises(ValueError):
+        summarize_lrp_relevance(
+            output=output,
+            relevance=relevance,
+            feature_names=["only_one_feature"],
+        )

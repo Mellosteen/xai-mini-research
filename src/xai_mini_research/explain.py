@@ -31,22 +31,28 @@ def explain_mlp_lrp(model : nn.Module, X, epsilon=1e-6):
 
     return output.detach(), relevance.detach()
 
-def summarize_mlp_lrp(model: nn.Module, processed_data, split="test", epsilon=1e-6):
+def summarize_lrp_relevance(output, relevance, feature_names, split="test", condition="normal", epsilon=1e-6):
     """
-    Summarize MLP LRP relevance values for one processed data split.
+    Summarize already-computed MLP LRP outputs and relevance values.
 
     Args:
-        model (nn.Module): A trained MLP model.
-        processed_data (dict): Dictionary returned by preprocess.
-        split (str): Data split to explain. Default "test".
+        output (torch.Tensor): Model outputs for one input matrix.
+        relevance (torch.Tensor): LRP relevance values for the same input matrix.
+        feature_names (list): Feature names in the same order as the relevance columns.
+        split (str): Data split that was explained. Default "test".
+        condition (str): Intervention condition that was explained. Default "normal".
         epsilon (float): Stabilizer used by the Zennit EpsilonPlus composite.
 
     Returns:
-        dict: relevance summary by feature.
+        dict: JSON-serializable relevance summary by feature.
     """
-    X = processed_data[split]["X_scaled"]
-    feature_names = processed_data["metadata"]["feature_names"]
-    output, relevance = explain_mlp_lrp(model=model, X=X, epsilon=epsilon)
+    if not isinstance(output, torch.Tensor):
+        output = torch.as_tensor(output)
+    if not isinstance(relevance, torch.Tensor):
+        relevance = torch.as_tensor(relevance)
+
+    if relevance.shape[1] != len(feature_names):
+        raise ValueError("feature_names length must match the number of relevance columns.")
 
     mean_abs_relevance = relevance.abs().mean(dim=0)
     mean_signed_relevance = relevance.mean(dim=0)
@@ -78,8 +84,9 @@ def summarize_mlp_lrp(model: nn.Module, processed_data, split="test", epsilon=1e
     return {
         "method": "zennit_lrp_epsilon_plus",
         "split": split,
+        "condition": condition,
         "epsilon": epsilon,
-        "n_samples": int(X.shape[0]),
+        "n_samples": int(relevance.shape[0]),
         "feature_names": list(feature_names),
         "output_mean": float(output.mean().item()),
         "output_std": float(output.std(unbiased=False).item()),
@@ -87,3 +94,29 @@ def summarize_mlp_lrp(model: nn.Module, processed_data, split="test", epsilon=1e
         "shortcut_relevance_share": shortcut_relevance_share,
         "by_feature": by_feature,
     }
+
+def summarize_mlp_lrp(model: nn.Module, processed_data, split="test", epsilon=1e-6):
+    """
+    Summarize MLP LRP relevance values for one processed data split.
+
+    Args:
+        model (nn.Module): A trained MLP model.
+        processed_data (dict): Dictionary returned by preprocess.
+        split (str): Data split to explain. Default "test".
+        epsilon (float): Stabilizer used by the Zennit EpsilonPlus composite.
+
+    Returns:
+        dict: relevance summary by feature.
+    """
+    X = processed_data[split]["X_scaled"]
+    feature_names = processed_data["metadata"]["feature_names"]
+    output, relevance = explain_mlp_lrp(model=model, X=X, epsilon=epsilon)
+
+    return summarize_lrp_relevance(
+        output=output,
+        relevance=relevance,
+        feature_names=feature_names,
+        split=split,
+        condition="normal",
+        epsilon=epsilon,
+    )

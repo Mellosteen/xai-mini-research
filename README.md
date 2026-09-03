@@ -12,38 +12,56 @@ This project implements a simple regression model trained on synthetic data incl
 xai-mini-research/
 |-- configs/
 |   `-- default.yaml              # Default experiment configuration
-|-- reports/                      # Research logs and generated comparison figures
+|-- reports/                      # Research logs and generated figures
 |   |-- model comparisons/
 |   |   |-- compare_16_08.png
 |   |   |-- compare_19_08.png
 |   |   |-- compare_22_08_base.png
-|   |   `-- compare_22_08_shortcut.png
+|   |   |-- compare_22_08_shortcut.png
+|   |   |-- compare_baseline_<timestamp>.png
+|   |   `-- compare_shortcut_<timestamp>.png
 |   |-- lrp heatmaps/
 |   |   |-- lrp_base_29_08_final.png
-|   |   `-- lrp_short_29_08_final.png
+|   |   |-- lrp_short_29_08_final.png
+|   |   |-- lrp_heatmap_baseline_<timestamp>.png
+|   |   `-- lrp_heatmap_shortcut_<timestamp>.png
 |   |-- lrp line maps/
 |   |   |-- lrp_line_base_29_08.png
-|   |   `-- lrp_line_short_29_08.png
+|   |   |-- lrp_line_short_29_08.png
+|   |   |-- lrp_line_baseline_<timestamp>.png
+|   |   `-- lrp_line_shortcut_<timestamp>.png
 |   |-- lrp shortcut scatters/
-|   |   `-- lrp_short_scatter_29_08.png
+|   |   |-- lrp_short_scatter_29_08.png
+|   |   |-- lrp_scatter_shortcut_normal_<timestamp>.png
+|   |   |-- lrp_scatter_shortcut_zeroed_<timestamp>.png
+|   |   |-- lrp_scatter_shortcut_noise_<timestamp>.png
+|   |   |-- lrp_scatter_shortcut_reversed_<timestamp>.png
+|   |   `-- lrp_scatter_shortcut_permuted_<timestamp>.png
+|   |-- log_02_09_2026.md
 |   |-- log_05_08_2026.md
 |   |-- log_08_08_2026.md
 |   |-- log_12_08_2026.md
 |   |-- log_16_08_2026.md
 |   |-- log_19_08_2026.md
+|   |-- log_22_08_2026.md
+|   |-- log_26_08_2026.md
+|   |-- log_29_08_2026.md
 |   `-- research_logs.md
-|-- results/                      # Saved experiment metrics as JSON files
+|-- results/                      # Saved experiment metrics, LRP summaries, and plot paths
+|   `-- model_comparison_<timestamp>.json
 |-- src/
 |   `-- xai_mini_research/
 |       |-- __init__.py
 |       |-- config.py             # Config loading helpers
 |       |-- data.py               # Synthetic time-series data generation
+|       |-- explain.py            # LRP attribution and relevance summary helpers
+|       |-- interventions.py      # Shortcut intervention helpers
 |       |-- metrics.py            # Regression metric helpers
 |       |-- preprocessing.py      # Feature scaling helpers
 |       |-- results.py            # JSON result-saving helper
 |       |-- experiments/
 |       |   |-- __init__.py
-|       |   `-- compare_models.py # LR, kRR, and MLP comparison script
+|       |   `-- compare_models.py # Model, LRP, and intervention comparison script
 |       `-- models/
 |           |-- __init__.py
 |           |-- krr.py            # Kernel ridge regression model helpers
@@ -52,6 +70,7 @@ xai-mini-research/
 |-- tests/
 |   |-- test_data.py
 |   |-- test_initial.py
+|   |-- test_interventions.py
 |   |-- test_krr.py
 |   |-- test_linear.py
 |   |-- test_metrics.py

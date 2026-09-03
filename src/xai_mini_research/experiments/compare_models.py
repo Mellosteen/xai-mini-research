@@ -2,12 +2,20 @@
 This file is created and intended for a quick test & comparison of the metrics
 of the linear regression model vs. kernel ridge regression model vs. MLP regression model.
 """
-import torch
+from datetime import datetime
+from pathlib import Path
+
 import matplotlib.pyplot as plt
-from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_mlp_lrp, explain_mlp_lrp
+import torch
+from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_lrp_relevance, summarize_mlp_lrp, explain_mlp_lrp, intervene_scaled_shortcut, regression_metrics
 from xai_mini_research.models import train_mlp, train_linear_model, predict_mlp_splits, predict_splits, MLPRegressor, set_torch_seed, train_krr_model, predict_krr_splits
 
 def print_metrics(name: str, metrics: dict):
+    print(f"\n{name}")
+    print("MAE      RMSE     R2")
+    print(f"{metrics['mae']:.4f}  {metrics['rmse']:.4f}  {metrics['r2']:.4f}")
+
+def print_metrics_all_splits(name: str, metrics: dict):
     print(f"\n{name}")
     print("split   MAE      RMSE     R2")
     for split, split_metrics in metrics.items():
@@ -17,6 +25,17 @@ def print_metrics(name: str, metrics: dict):
             f"{split_metrics['rmse']:.4f}  "
             f"{split_metrics['r2']:.4f}"
         )
+
+def save_plot(fig, subdir: str, filename: str):
+    """
+    Save a matplotlib figure under the project's reports directory.
+    """
+    project_root = Path(__file__).resolve().parents[3]
+    output_dir = project_root / "reports" / subdir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / filename
+    fig.savefig(output_path, dpi=200, bbox_inches="tight")
+    return output_path
 
 def plot_model_comparison(processed_data, linear_predictions, krr_predictions, mlp_predictions, title="Linear Regression vs kRR Regression vs MLP Predictions", show=True, zoom_to_target=False):
     fig, ax = plt.subplots(figsize=(12, 5))
@@ -246,6 +265,7 @@ def choose_best_krr(processed_data):
                 
 
 def main():
+    run_id = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     data_seed = 42
     n_samples = 3650
     noise_level = 0.05
@@ -295,12 +315,73 @@ def main():
     mlp_lrp_summary = summarize_mlp_lrp(mlp_model, processed_data, split="test")
     mlp_shortcut_lrp_summary = summarize_mlp_lrp(mlp_shortcut_model, processed_shortcut_data, split="test")
 
-    print_metrics("Linear Regression", lin_metrics)
-    print_metrics("Linear Regression Shortcut", lin_shortcut_metrics)
-    print_metrics(f"kRR alpha = {krr_params['alpha']} gamma = {krr_params['gamma']}", krr_metrics)
-    print_metrics(f"kRR Shortcut alpha = {krr_shortcut_params['alpha']} gamma = {krr_shortcut_params['gamma']}", krr_shortcut_metrics)
-    print_metrics("MLP", mlp_metrics)
-    print_metrics("MLP Shortcut", mlp_shortcut_metrics)
+    # Zeroed shortcut intervention
+    zeroed_shortcut = intervene_scaled_shortcut(processed_data=processed_shortcut_data, split="test", condition="zeroed", seed=seed)
+    
+    # Noise shortcut intervention
+    noise_shortcut = intervene_scaled_shortcut(processed_data=processed_shortcut_data, split="test", condition="noise", seed=seed)
+
+    # Reversed shortcut intervention
+    reversed_shortcut = intervene_scaled_shortcut(processed_data=processed_shortcut_data, split="test", condition="reversed", seed=seed)
+
+    # Permuted shortcut intervention
+    permuted_shortcut = intervene_scaled_shortcut(processed_data=processed_shortcut_data, split="test", condition="permuted", seed=seed)
+
+    _, relevances = explain_mlp_lrp(model=mlp_model, X=processed_data["test"]["X_scaled"])
+    shortcut_outputs, shortcut_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=processed_shortcut_data["test"]["X_scaled"])
+
+    # Intervention validation
+    zeroed_short_outputs, zeroed_short_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=zeroed_shortcut["X_scaled"])
+    noise_short_outputs, noise_short_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=noise_shortcut["X_scaled"])
+    reversed_short_outputs, reversed_short_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=reversed_shortcut["X_scaled"])
+    permuted_short_outputs, permuted_short_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=permuted_shortcut["X_scaled"])
+
+
+    zeroed_short_metrics = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=zeroed_short_outputs)
+    noise_short_metrics = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=noise_short_outputs)
+    reversed_short_metrics = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=reversed_short_outputs)
+    permuted_short_metrics = regression_metrics(y_target=processed_shortcut_data["test"]["y"], y_pred=permuted_short_outputs)
+
+    zeroed_short_lrp_summary = summarize_lrp_relevance(
+        output=zeroed_short_outputs,
+        relevance=zeroed_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        split="test",
+        condition="zeroed",
+    )
+    noise_short_lrp_summary = summarize_lrp_relevance(
+        output=noise_short_outputs,
+        relevance=noise_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        split="test",
+        condition="noise",
+    )
+    reversed_short_lrp_summary = summarize_lrp_relevance(
+        output=reversed_short_outputs,
+        relevance=reversed_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        split="test",
+        condition="reversed",
+    )
+    permuted_short_lrp_summary = summarize_lrp_relevance(
+        output=permuted_short_outputs,
+        relevance=permuted_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        split="test",
+        condition="permuted",
+    )
+
+    # Print results
+    print_metrics_all_splits("Linear Regression", lin_metrics)
+    print_metrics_all_splits("Linear Regression Shortcut", lin_shortcut_metrics)
+    print_metrics_all_splits(f"kRR alpha = {krr_params['alpha']} gamma = {krr_params['gamma']}", krr_metrics)
+    print_metrics_all_splits(f"kRR Shortcut alpha = {krr_shortcut_params['alpha']} gamma = {krr_shortcut_params['gamma']}", krr_shortcut_metrics)
+    print_metrics_all_splits("MLP", mlp_metrics)
+    print_metrics_all_splits("MLP Shortcut", mlp_shortcut_metrics)
+    print_metrics("MLP Zeroed Shortcut", zeroed_short_metrics)
+    print_metrics("MLP Noise Shortcut", noise_short_metrics)
+    print_metrics("MLP Reversed Shortcut", reversed_short_metrics)
+    print_metrics("MLP Permuted Shortcut", permuted_short_metrics)
 
     # Saving results under results/
     results = {
@@ -339,13 +420,46 @@ def main():
                     "baseline" : mlp_lrp_summary,
                     "shortcut" : mlp_shortcut_lrp_summary,
                 },
+                "interventions": {
+                    "target_model": "shortcut_mlp",
+                    "split": "test",
+                    "feature_space": "scaled",
+                    "changed_feature": "shortcut_polynomial",
+                    "conditions": {
+                        "normal": {
+                            "metrics": mlp_shortcut_metrics["test"],
+                            "shortcut_relevance_share": mlp_shortcut_lrp_summary["shortcut_relevance_share"],
+                            "lrp": mlp_shortcut_lrp_summary,
+                        },
+                        "zeroed": {
+                            "metrics": zeroed_short_metrics,
+                            "shortcut_relevance_share": zeroed_short_lrp_summary["shortcut_relevance_share"],
+                            "lrp": zeroed_short_lrp_summary,
+                        },
+                        "noise": {
+                            "metrics": noise_short_metrics,
+                            "seed": seed,
+                            "shortcut_relevance_share": noise_short_lrp_summary["shortcut_relevance_share"],
+                            "lrp": noise_short_lrp_summary,
+                        },
+                        "reversed": {
+                            "metrics": reversed_short_metrics,
+                            "shortcut_relevance_share": reversed_short_lrp_summary["shortcut_relevance_share"],
+                            "lrp": reversed_short_lrp_summary,
+                        },
+                        "permuted": {
+                            "metrics": permuted_short_metrics,
+                            "seed": seed,
+                            "shortcut_relevance_share": permuted_short_lrp_summary["shortcut_relevance_share"],
+                            "lrp": permuted_short_lrp_summary,
+                        },
+                    },
+                },
             },
         }
     }
 
-    save_results(results=results)
-
-    plot_model_comparison(
+    baseline_comparison_fig, _ = plot_model_comparison(
         processed_data,
         lin_predictions,
         krr_predictions,
@@ -353,58 +467,176 @@ def main():
         title="Baseline Model Predictions",
         show=False,
     )
-    plot_model_comparison(
+    baseline_comparison_path = save_plot(
+        baseline_comparison_fig,
+        subdir="model comparisons",
+        filename=f"compare_baseline_{run_id}.png",
+    )
+
+    shortcut_comparison_fig, _ = plot_model_comparison(
         processed_shortcut_data,
         lin_shortcut_predictions,
         krr_shortcut_predictions,
         mlp_shortcut_predictions,
         title=f"Shortcut Model Predictions ({shortcut_fit_split}, degree {shortcut_deg})",
         zoom_to_target=True,
-        show=True,
+        show=False,
+    )
+    shortcut_comparison_path = save_plot(
+        shortcut_comparison_fig,
+        subdir="model comparisons",
+        filename=f"compare_shortcut_{run_id}.png",
     )
 
-    _, relevances = explain_mlp_lrp(model=mlp_model, X=processed_data["test"]["X_scaled"])
-    shortcut_outputs, shortcut_relevances = explain_mlp_lrp(model=mlp_shortcut_model, X=processed_shortcut_data["test"]["X_scaled"])
-
-    plot_lrp_relevance_heatmap(  # Default heatmap
+    baseline_heatmap_fig, _ = plot_lrp_relevance_heatmap(  # Default heatmap
         feature_names=processed_data["metadata"]["feature_names"],
         relevances=relevances,
         title="LRP Relevance Heatmap",
-        show=True
+        show=False,
+    )
+    baseline_heatmap_path = save_plot(
+        baseline_heatmap_fig,
+        subdir="lrp heatmaps",
+        filename=f"lrp_heatmap_baseline_{run_id}.png",
     )
 
-    plot_lrp_relevance_heatmap(  # Shortcut heatmap
+    shortcut_heatmap_fig, _ = plot_lrp_relevance_heatmap(  # Shortcut heatmap
         feature_names=processed_shortcut_data["metadata"]["feature_names"],
         relevances=shortcut_relevances,
         title="LRP Relevance Heatmap w/ Shortcut",
-        show=True
+        show=False,
+    )
+    shortcut_heatmap_path = save_plot(
+        shortcut_heatmap_fig,
+        subdir="lrp heatmaps",
+        filename=f"lrp_heatmap_shortcut_{run_id}.png",
     )
 
-    plot_lrp_relevance_lines(   # Default line map
+    baseline_line_fig, _ = plot_lrp_relevance_lines(   # Default line map
         time=processed_data["test"]["time"],
         feature_names=processed_data["metadata"]["feature_names"],
         relevances=relevances,
         title="LRP Relevance Line Map",
-        show=True
+        show=False,
+    )
+    baseline_line_path = save_plot(
+        baseline_line_fig,
+        subdir="lrp line maps",
+        filename=f"lrp_line_baseline_{run_id}.png",
     )
 
-    plot_lrp_relevance_lines(   # Shortcut line map
+    shortcut_line_fig, _ = plot_lrp_relevance_lines(   # Shortcut line map
         time=processed_shortcut_data["test"]["time"],
         feature_names=processed_shortcut_data["metadata"]["feature_names"],
         relevances=shortcut_relevances,
         title="LRP Relevance Line Map w/ Shortcut",
-        show=True
+        show=False,
+    )
+    shortcut_line_path = save_plot(
+        shortcut_line_fig,
+        subdir="lrp line maps",
+        filename=f"lrp_line_shortcut_{run_id}.png",
     )
 
-    plot_lrp_prediction_and_shortcut_relevance_scatter( # Prediction v. Relevance scatter for shortcut model
+    shortcut_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Prediction v. Relevance scatter for shortcut model
         time=processed_shortcut_data["test"]["time"],
         predictions=shortcut_outputs,
         relevances=shortcut_relevances,
         feature_names=processed_shortcut_data["metadata"]["feature_names"],
         target=processed_shortcut_data["test"]["y"],
         title="LRP Prediction vs. Relevance Scatter",
-        show=True
+        show=False,
     )
+    shortcut_scatter_path = save_plot(
+        shortcut_scatter_fig,
+        subdir="lrp shortcut scatters",
+        filename=f"lrp_scatter_shortcut_normal_{run_id}.png",
+    )
+
+    zeroed_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for zeroed shortcut feature
+        time=processed_shortcut_data["test"]["time"], 
+        predictions=zeroed_short_outputs, 
+        relevances=zeroed_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        target=processed_shortcut_data["test"]["y"],
+        title="LRP Prediction vs. Relevance Scatter w/ Zeroed Shortcut",
+        show=False,
+    )
+    zeroed_scatter_path = save_plot(
+        zeroed_scatter_fig,
+        subdir="lrp shortcut scatters",
+        filename=f"lrp_scatter_shortcut_zeroed_{run_id}.png",
+    )
+
+    noise_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for noise shortcut feature
+        time=processed_shortcut_data["test"]["time"], 
+        predictions=noise_short_outputs, 
+        relevances=noise_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        target=processed_shortcut_data["test"]["y"],
+        title="LRP Prediction vs. Relevance Scatter w/ Noise Shortcut",
+        show=False,
+    )
+    noise_scatter_path = save_plot(
+        noise_scatter_fig,
+        subdir="lrp shortcut scatters",
+        filename=f"lrp_scatter_shortcut_noise_{run_id}.png",
+    )
+
+    reversed_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for reversed shortcut feature
+        time=processed_shortcut_data["test"]["time"], 
+        predictions=reversed_short_outputs, 
+        relevances=reversed_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        target=processed_shortcut_data["test"]["y"],
+        title="LRP Prediction vs. Relevance Scatter w/ Reversed Shortcut",
+        show=False,
+    )
+    reversed_scatter_path = save_plot(
+        reversed_scatter_fig,
+        subdir="lrp shortcut scatters",
+        filename=f"lrp_scatter_shortcut_reversed_{run_id}.png",
+    )
+
+    permuted_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for permuted shortcut feature
+        time=processed_shortcut_data["test"]["time"], 
+        predictions=permuted_short_outputs, 
+        relevances=permuted_short_relevances,
+        feature_names=processed_shortcut_data["metadata"]["feature_names"],
+        target=processed_shortcut_data["test"]["y"],
+        title="LRP Prediction vs. Relevance Scatter w/ Permuted Shortcut",
+        show=False,
+    )
+    permuted_scatter_path = save_plot(
+        permuted_scatter_fig,
+        subdir="lrp shortcut scatters",
+        filename=f"lrp_scatter_shortcut_permuted_{run_id}.png",
+    )
+
+    results["plots"] = {
+        "model_comparison": {
+            "baseline": str(baseline_comparison_path),
+            "shortcut": str(shortcut_comparison_path),
+        },
+        "lrp_heatmaps": {
+            "baseline": str(baseline_heatmap_path),
+            "shortcut": str(shortcut_heatmap_path),
+        },
+        "lrp_line_maps": {
+            "baseline": str(baseline_line_path),
+            "shortcut": str(shortcut_line_path),
+        },
+        "lrp_shortcut_scatters": {
+            "normal": str(shortcut_scatter_path),
+            "zeroed": str(zeroed_scatter_path),
+            "noise": str(noise_scatter_path),
+            "reversed": str(reversed_scatter_path),
+            "permuted": str(permuted_scatter_path),
+        },
+    }
+
+    save_results(results=results, filename=f"model_comparison_{run_id}.json")
+    plt.show()
 
 if __name__ == "__main__":
     main()

@@ -14,3 +14,4 @@ This file is an index of dated research notes for the project.
 | 2026-08-22 | Week 3 shortcut features, visualizations | [August 22nd, 2026](log_22_08_2026.md) |
 | 2026-08-26 | Week 4 Zennit LRP implementation | [August 26th, 2026](log_26_08_2026.md) |
 | 2026-08-29 | Week 4 LRP comparison integration | [August 29th, 2026](log_29_08_2026.md) |
+| 2026-09-02 | Week 5 Intervention validation | [September 02nd, 2026](log_02_09_2026.md) |
