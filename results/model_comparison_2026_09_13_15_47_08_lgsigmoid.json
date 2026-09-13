@@ -1,0 +1,1158 @@
+{
+    "provenance": {
+        "run_id": "2026_09_13_15_47_08_lgsigmoid",
+        "activation": "LogSigmoid",
+        "activation_slug": "lgsigmoid",
+        "git_commit": "e73c793b0aff73d3196f3dcf31e289e1b63d80af",
+        "working_tree_dirty": true,
+        "git_status_at_start": [
+            "M README.md",
+            " M src/xai_mini_research/experiments/compare_models.py",
+            " M src/xai_mini_research/models/mlp.py",
+            "?? reports/Final_Report.md",
+            "?? \"reports/activation diagnostics/\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? results/artifacts_2026_09_13_15_46_44_relu/",
+            "?? results/artifacts_2026_09_13_15_47_08_lgsigmoid/",
+            "?? results/model_comparison_2026_09_08_07_42_57.json",
+            "?? results/model_comparison_2026_09_09_10_00_11.json",
+            "?? results/model_comparison_2026_09_09_10_02_17.json",
+            "?? results/model_comparison_2026_09_10_08_32_06.json",
+            "?? results/model_comparison_2026_09_13_15_46_44_relu.json",
+            "?? src/xai_mini_research/diagnostics.py",
+            "?? tests/test_activation_diagnostics.py"
+        ],
+        "source_sha256": {
+            "src/xai_mini_research/__init__.py": "52e627b83655f374287188faf071fbf61d3d7b84bb5249513c5f2d85b0ee21ea",
+            "src/xai_mini_research/config.py": "4e521273459bee94e3ce5c9de3e02cd15bffbd0607e2d1f833e2a5d90c20f4e1",
+            "src/xai_mini_research/data.py": "81fc057f541b5d8e465f1223479d5ebc2795fef8ff27836ff61c455a66b3d15b",
+            "src/xai_mini_research/diagnostics.py": "ef5a6d2a708bb886498788baa278da9dad8c0f2ab4f8514837ac71dfd3106fcb",
+            "src/xai_mini_research/experiments/__init__.py": "31f5661b3e5a88f6b898bb8e51e016906e47b9e8c7cccec716e8175d3028701f",
+            "src/xai_mini_research/experiments/compare_models.py": "67c4bba0fca66f8be08ec4decb2b6047b8c54e6637a5586f63ead2307afb40c0",
+            "src/xai_mini_research/explain.py": "e097cb49f52460482ab90eae9ad3dd70a6f20a6ecff8dd7a80da60f71ba74878",
+            "src/xai_mini_research/interventions.py": "9daeb3f76aa68271d801dfb3c5c076ced6ef1baa26175ca9ea6aeded88f9a51a",
+            "src/xai_mini_research/metrics.py": "4cb3bb89b702a1c4555701e9383dce260c6e804cc6a5dc7e054a1056d060d052",
+            "src/xai_mini_research/models/__init__.py": "6be10a5c09af1c6324cfd9dc42d2aee4ab9638bc41aa74ad8005a03b2e309f1b",
+            "src/xai_mini_research/models/krr.py": "1126c114fa1ea3b020ca2bce543eef17f342cf314d93514decd307da4943a50b",
+            "src/xai_mini_research/models/linear.py": "00adf9bc32e5a8dc9644d50f927394ddb1afd1787aba83cff9bdb7ea33cfb840",
+            "src/xai_mini_research/models/mlp.py": "ed60c358c9b942e7e32b13dc4db669e52369f5aee949c442e4b1100c8c0e4ebf",
+            "src/xai_mini_research/preprocessing.py": "9a2cbcf85cbd7ecf0fa13f2b73c1e475c40c471e9cec524c59e974120b6d36c7",
+            "src/xai_mini_research/results.py": "db14cfd344a39ce2eae5f8bc33e66fb870991da05407b4c9772c76f1a8c2a8ab",
+            "requirements.txt": "12ecd54cbbca0aeea5a584f67fad5092d08d327f9c6600c7706ff2202e64dff0",
+            "configs/default.yaml": "fbc1023bbf96838ef06e782d9a4f80fde1b341702b91a15f1ce63a3cde8ed995"
+        },
+        "source_archive": "results/artifacts_2026_09_13_15_47_08_lgsigmoid/source.zip",
+        "versions": {
+            "torch": "2.13.0",
+            "numpy": "2.5.1",
+            "scikit-learn": "1.9.0",
+            "zennit": "1.0.0",
+            "matplotlib": "3.11.1"
+        },
+        "device": "cpu",
+        "torch_num_threads": 4,
+        "command": "PYTHONPATH=src python -m xai_mini_research.experiments.compare_models --activation lgsigmoid"
+    },
+    "time_data": {
+        "n_samples": 3650,
+        "noise_level": 0.05,
+        "training_ratio": 0.7,
+        "val_ratio": 0.15,
+        "test_ratio": 0.15,
+        "data_seed": 42,
+        "shortcut": true,
+        "shortcut_fit_split": "train_val",
+        "shortcut_deg": 20
+    },
+    "models": {
+        "linear_regression": {
+            "metrics": {
+                "train": {
+                    "mae": 1.0096916544113133,
+                    "rmse": 1.293353101320676,
+                    "r2": 0.992781607786372
+                },
+                "val": {
+                    "mae": 2.5110545746011215,
+                    "rmse": 2.7966586748573037,
+                    "r2": 0.7497267768320507
+                },
+                "test": {
+                    "mae": 3.2841546571167113,
+                    "rmse": 3.676044010079359,
+                    "r2": 0.6917521658893317
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 1.018802611004886,
+                    "rmse": 1.2919878193783418,
+                    "r2": 0.9927968394178863
+                },
+                "val": {
+                    "mae": 2.2635480659935987,
+                    "rmse": 2.5168282862538938,
+                    "r2": 0.7973051897837571
+                },
+                "test": {
+                    "mae": 12219.628665962855,
+                    "rmse": 28532.680544809362,
+                    "r2": -18570506.712731756
+                }
+            }
+        },
+        "kernel_rr": {
+            "params": {
+                "alpha": 0.001,
+                "gamma": 0.001
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0667229999023759,
+                    "rmse": 0.08477434884922382,
+                    "r2": 0.9999689876138043
+                },
+                "val": {
+                    "mae": 0.130172300792941,
+                    "rmse": 0.172740283718569,
+                    "r2": 0.9990451773475195
+                },
+                "test": {
+                    "mae": 0.4961809900601458,
+                    "rmse": 0.5798898894354125,
+                    "r2": 0.9923293935220656
+                }
+            },
+            "shortcut_params": {
+                "alpha": 0.005,
+                "gamma": 0.001
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.1820060877583984,
+                    "rmse": 0.21602434472995843,
+                    "r2": 0.9997986221725516
+                },
+                "val": {
+                    "mae": 0.16518642382544962,
+                    "rmse": 0.19969103004678204,
+                    "r2": 0.9987239944276418
+                },
+                "test": {
+                    "mae": 59.52533509531257,
+                    "rmse": 63.616731507881426,
+                    "r2": -91.31692579741842
+                }
+            }
+        },
+        "mlp": {
+            "params": {
+                "activation": "LogSigmoid",
+                "hidden_dimensions": [
+                    8,
+                    4
+                ],
+                "batch_size": 32,
+                "optimizer": "Adam",
+                "optimizer_defaults": {
+                    "lr": 0.01,
+                    "betas": [
+                        0.9,
+                        0.999
+                    ],
+                    "eps": 1e-08,
+                    "weight_decay": 0,
+                    "amsgrad": false,
+                    "maximize": false,
+                    "foreach": null,
+                    "capturable": false,
+                    "differentiable": false,
+                    "fused": null,
+                    "decoupled_weight_decay": false
+                },
+                "loss": "MSELoss",
+                "min_delta": 0.0001,
+                "learning_rate": 0.01,
+                "epochs": 50,
+                "patience": 5,
+                "seed": 42
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0772460288032519,
+                    "rmse": 0.09924749133145909,
+                    "r2": 0.9999574944799401
+                },
+                "val": {
+                    "mae": 0.3511636874836785,
+                    "rmse": 0.4337333866680926,
+                    "r2": 0.993980212466748
+                },
+                "test": {
+                    "mae": 0.9897064778808315,
+                    "rmse": 1.1209903758031854,
+                    "r2": 0.9713356302437062
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.18735891311346417,
+                    "rmse": 0.2245182197242445,
+                    "r2": 0.9997824748693965
+                },
+                "val": {
+                    "mae": 0.3170466915802841,
+                    "rmse": 0.36235578599789164,
+                    "r2": 0.995798485589444
+                },
+                "test": {
+                    "mae": 42531.452978118614,
+                    "rmse": 99561.66606712058,
+                    "r2": -226111649.6181986
+                }
+            },
+            "lrp": {
+                "baseline": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality"
+                    ],
+                    "output_mean": 68.88734436035156,
+                    "output_std": 5.6548004150390625,
+                    "total_mean_abs_relevance": 0.6922621726989746,
+                    "shortcut_relevance_share": null,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.37171947956085205,
+                            "mean_signed_relevance": 0.37171947956085205,
+                            "relevance_share": 0.5369634628295898
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.24903135001659393,
+                            "mean_signed_relevance": 0.24903135001659393,
+                            "relevance_share": 0.3597356081008911
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.07151132076978683,
+                            "mean_signed_relevance": 0.015775667503476143,
+                            "relevance_share": 0.10330092161893845
+                        }
+                    }
+                },
+                "shortcut": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality",
+                        "shortcut_polynomial"
+                    ],
+                    "output_mean": 42428.640625,
+                    "output_std": 90104.640625,
+                    "total_mean_abs_relevance": 2.5580334663391113,
+                    "shortcut_relevance_share": 0.7063162922859192,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.22695393860340118,
+                            "mean_signed_relevance": 0.025479888543486595,
+                            "relevance_share": 0.08872203528881073
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.4413723349571228,
+                            "mean_signed_relevance": 0.07608728110790253,
+                            "relevance_share": 0.17254361510276794
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.08292638510465622,
+                            "mean_signed_relevance": 0.009409035556018353,
+                            "relevance_share": 0.03241802379488945
+                        },
+                        "shortcut_polynomial": {
+                            "mean_abs_relevance": 1.8067806959152222,
+                            "mean_signed_relevance": 0.7857670187950134,
+                            "relevance_share": 0.7063162922859192
+                        }
+                    }
+                }
+            },
+            "interventions": {
+                "target_model": "shortcut_mlp",
+                "split": "test",
+                "feature_space": "scaled",
+                "changed_feature": "shortcut_polynomial",
+                "conditions": {
+                    "normal": {
+                        "metrics": {
+                            "mae": 42531.452978118614,
+                            "rmse": 99561.66606712058,
+                            "r2": -226111649.6181986
+                        },
+                        "shortcut_relevance_share": 0.7063162922859192,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "normal",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 42428.640625,
+                            "output_std": 90104.640625,
+                            "total_mean_abs_relevance": 2.5580334663391113,
+                            "shortcut_relevance_share": 0.7063162922859192,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.22695393860340118,
+                                    "mean_signed_relevance": 0.025479888543486595,
+                                    "relevance_share": 0.08872203528881073
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.4413723349571228,
+                                    "mean_signed_relevance": 0.07608728110790253,
+                                    "relevance_share": 0.17254361510276794
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.08292638510465622,
+                                    "mean_signed_relevance": 0.009409035556018353,
+                                    "relevance_share": 0.03241802379488945
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 1.8067806959152222,
+                                    "mean_signed_relevance": 0.7857670187950134,
+                                    "relevance_share": 0.7063162922859192
+                                }
+                            }
+                        }
+                    },
+                    "zeroed": {
+                        "metrics": {
+                            "mae": 9.432146854314224,
+                            "rmse": 9.68733987707927,
+                            "r2": -1.1406600470769006
+                        },
+                        "shortcut_relevance_share": 0.0,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "zeroed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 59.863765716552734,
+                            "output_std": 4.4501872062683105,
+                            "total_mean_abs_relevance": 0.6296945810317993,
+                            "shortcut_relevance_share": 0.0,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.21746833622455597,
+                                    "mean_signed_relevance": 0.21746833622455597,
+                                    "relevance_share": 0.3453552722930908
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.35325339436531067,
+                                    "mean_signed_relevance": 0.35325339436531067,
+                                    "relevance_share": 0.560991644859314
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.05897283926606178,
+                                    "mean_signed_relevance": 0.015683744102716446,
+                                    "relevance_share": 0.09365308284759521
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.0,
+                                    "mean_signed_relevance": 0.0,
+                                    "relevance_share": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "noise": {
+                        "metrics": {
+                            "mae": 9.517480428239077,
+                            "rmse": 10.253702232233856,
+                            "r2": -1.3982808082181934
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.061988670378923416,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "noise",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 59.80174255371094,
+                            "output_std": 5.3481903076171875,
+                            "total_mean_abs_relevance": 0.6738502979278564,
+                            "shortcut_relevance_share": 0.061988670378923416,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.21833059191703796,
+                                    "mean_signed_relevance": 0.21833059191703796,
+                                    "relevance_share": 0.324004590511322
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.3543570637702942,
+                                    "mean_signed_relevance": 0.3543570637702942,
+                                    "relevance_share": 0.5258691310882568
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.05939159169793129,
+                                    "mean_signed_relevance": 0.01594093069434166,
+                                    "relevance_share": 0.0881376639008522
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.04177108407020569,
+                                    "mean_signed_relevance": -0.003482513129711151,
+                                    "relevance_share": 0.061988670378923416
+                                }
+                            }
+                        }
+                    },
+                    "reversed": {
+                        "metrics": {
+                            "mae": 14313.824882924591,
+                            "rmse": 33107.620119662104,
+                            "r2": -25003139.205678347
+                        },
+                        "shortcut_relevance_share": 0.8615835905075073,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "reversed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": -13881.4072265625,
+                            "output_std": 30021.314453125,
+                            "total_mean_abs_relevance": 1.4157214164733887,
+                            "shortcut_relevance_share": 0.8615835905075073,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.06306134164333344,
+                                    "mean_signed_relevance": 0.022024406120181084,
+                                    "relevance_share": 0.04454360902309418
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.0766422227025032,
+                                    "mean_signed_relevance": 0.07265138626098633,
+                                    "relevance_share": 0.05413651466369629
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.05625557899475098,
+                                    "mean_signed_relevance": -0.03457069396972656,
+                                    "relevance_share": 0.03973633423447609
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 1.2197623252868652,
+                                    "mean_signed_relevance": 1.1891086101531982,
+                                    "relevance_share": 0.8615835905075073
+                                }
+                            }
+                        }
+                    },
+                    "permuted": {
+                        "metrics": {
+                            "mae": 42533.450251240305,
+                            "rmse": 99563.05231330969,
+                            "r2": -226117946.19013238
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.7203336358070374,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "permuted",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 42428.19140625,
+                            "output_std": 90102.6875,
+                            "total_mean_abs_relevance": 1.965407133102417,
+                            "shortcut_relevance_share": 0.7203336358070374,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.19120275974273682,
+                                    "mean_signed_relevance": 0.05675951763987541,
+                                    "relevance_share": 0.09728404879570007
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.32398921251296997,
+                                    "mean_signed_relevance": 0.1417994350194931,
+                                    "relevance_share": 0.16484585404396057
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.03446641191840172,
+                                    "mean_signed_relevance": 0.02122911438345909,
+                                    "relevance_share": 0.017536524683237076
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 1.4157488346099854,
+                                    "mean_signed_relevance": 0.6557926535606384,
+                                    "relevance_share": 0.7203336358070374
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "training": {
+                "baseline": {
+                    "completed_epochs": 50,
+                    "train_losses": [
+                        413.77562799845657,
+                        6.24731306180562,
+                        5.158075938439416,
+                        4.806198021390434,
+                        4.51814567823466,
+                        4.268155986222269,
+                        4.032542833003513,
+                        3.768527186966689,
+                        3.486865401967864,
+                        3.126386286087932,
+                        2.708765653201512,
+                        2.139177976709056,
+                        1.4129109696866016,
+                        0.6872464293136522,
+                        0.2864688149345364,
+                        0.17500756762032407,
+                        0.13116514077975092,
+                        0.10100703860274034,
+                        0.07969509570216013,
+                        0.0688055395146872,
+                        0.056660523697179825,
+                        0.04747751881669179,
+                        0.040045853137036826,
+                        0.03601322125665362,
+                        0.030898243438911763,
+                        0.026647267163295567,
+                        0.023051973373980905,
+                        0.020751925350081198,
+                        0.018117701297957603,
+                        0.014785376230506282,
+                        0.014310928774585696,
+                        0.013639735190631592,
+                        0.012399773588021324,
+                        0.011777825695107129,
+                        0.011132928072939648,
+                        0.011673660439287846,
+                        0.010602322345464663,
+                        0.010918055389645107,
+                        0.010522511691481983,
+                        0.009720950930173384,
+                        0.01055529680861244,
+                        0.009911512600990657,
+                        0.010181362063071733,
+                        0.010049491241545127,
+                        0.010623196149044424,
+                        0.011266974537996046,
+                        0.00984728384376622,
+                        0.009088298263768219,
+                        0.00996300802691867,
+                        0.010244564165282856
+                    ],
+                    "val_losses": [
+                        129.6501027164773,
+                        36.56293488246213,
+                        31.735453436535934,
+                        32.351599775241105,
+                        30.897149478277733,
+                        33.212813138525924,
+                        25.436014269562047,
+                        24.18043090220561,
+                        23.258490410757673,
+                        23.274901238394392,
+                        15.763144791235218,
+                        15.781780375423118,
+                        9.89964236201926,
+                        4.661600602555755,
+                        3.3000213825288593,
+                        2.1479686405475658,
+                        1.660323541795314,
+                        1.5430532511344122,
+                        1.1837695295593855,
+                        1.0406405229659468,
+                        0.9264650006099201,
+                        0.8379763199980124,
+                        0.7862902623848135,
+                        0.6571062599775727,
+                        0.7427398904517865,
+                        0.6030953243218186,
+                        0.5012228381551863,
+                        0.5052886504162327,
+                        0.51582548479759,
+                        0.47710500275835366,
+                        0.3867815828250493,
+                        0.3421367119429071,
+                        0.3136240788326825,
+                        0.35933095659767794,
+                        0.34306983229443705,
+                        0.3060799938636377,
+                        0.3252687450475783,
+                        0.2952379707602011,
+                        0.2563077495935657,
+                        0.27059457526828284,
+                        0.2603208833753763,
+                        0.2265047243365531,
+                        0.2353295181883019,
+                        0.21871654532672719,
+                        0.23561897392042486,
+                        0.21780949302521657,
+                        0.2363457062385527,
+                        0.18812465825896213,
+                        0.19546097783300298,
+                        0.21306230429001494
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_47_08_lgsigmoid/baseline_lgsigmoid.pt"
+                },
+                "shortcut": {
+                    "completed_epochs": 42,
+                    "train_losses": [
+                        558.9296944425997,
+                        24.132477923988596,
+                        7.056424537143595,
+                        5.659611947755757,
+                        5.016922202175611,
+                        4.61103793002388,
+                        4.308493198200681,
+                        4.021636415507696,
+                        3.785366070293867,
+                        3.536036951807847,
+                        3.3556291659984105,
+                        3.1784837601469453,
+                        2.982835567627401,
+                        2.7793294355594016,
+                        2.5983750513155166,
+                        2.374021347628181,
+                        2.11367105401892,
+                        1.7492799006329591,
+                        1.0014184146361342,
+                        0.30931300292276354,
+                        0.22440333782810054,
+                        0.20994005631910612,
+                        0.1972434579276292,
+                        0.18588185500492088,
+                        0.17155591964488393,
+                        0.16921444623029394,
+                        0.1582141131629216,
+                        0.14764059279296263,
+                        0.1392189637147284,
+                        0.1317117067611614,
+                        0.11716856539191099,
+                        0.10511747679131839,
+                        0.10100294413107015,
+                        0.08351087790208553,
+                        0.07020266454105507,
+                        0.06358931954884482,
+                        0.052679127759487895,
+                        0.04716859933739772,
+                        0.041438346025178575,
+                        0.042297512097484675,
+                        0.0433641086687897,
+                        0.04121627056726971
+                    ],
+                    "val_losses": [
+                        360.1731546182301,
+                        50.83425089471737,
+                        24.295865273344887,
+                        23.322195018231323,
+                        21.4828628212268,
+                        23.74772028600494,
+                        19.309569332673735,
+                        15.83848374068628,
+                        17.52458086310183,
+                        18.38476992438001,
+                        12.878661978615268,
+                        14.078947642603566,
+                        12.438859943062122,
+                        14.271269930782005,
+                        11.70510146125361,
+                        8.620617464647868,
+                        9.067594396566777,
+                        7.117788580697459,
+                        2.5720249894441154,
+                        0.782680744744524,
+                        0.5186557909252438,
+                        0.5526670926885587,
+                        0.4532108059258522,
+                        0.408559012347645,
+                        0.5240558859580614,
+                        0.47624706186803645,
+                        0.3975350380052814,
+                        0.24286639085635406,
+                        0.19918341305399725,
+                        0.18468451914011452,
+                        0.20011802488968622,
+                        0.19335881845388814,
+                        0.1686358783646083,
+                        0.1634262373068215,
+                        0.24340514236655925,
+                        0.13729999090461453,
+                        0.13130171019481784,
+                        0.16630615767983675,
+                        0.28816362474474655,
+                        0.27141277634383776,
+                        0.23847360970278764,
+                        0.27033439243188506
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_47_08_lgsigmoid/shortcut_lgsigmoid.pt"
+                }
+            },
+            "attribution_rules": {
+                "epsilon": 1e-06,
+                "output_seed": "ones_like",
+                "layers": [
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "LogSigmoid",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "LogSigmoid",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    }
+                ]
+            }
+        }
+    },
+    "activation_diagnostics": {
+        "baseline": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.8991682974559687,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.7021526418786693,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.7644250988960266,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.5,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.06261425959780621,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.7644250988960266,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.5,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.2071167883211679,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.7644250988960266,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.5,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.21682464454976302,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.7644250988960266,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            }
+        },
+        "shortcut": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.9263698630136986,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.8551859099804305,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.15106318891048431,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.75,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.15106318891048431,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.6405109489051095,
+                        "exact_zero_fraction": 0.13070255474452555,
+                        "near_zero_fraction": 0.28672445255474455,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.4233576642335766,
+                            0.0,
+                            0.0,
+                            0.08029197080291971,
+                            0.0,
+                            0.34124087591240876,
+                            0.10036496350364964,
+                            0.10036496350364964
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.7495437956204379,
+                        "exact_zero_fraction": 0.2093978102189781,
+                        "near_zero_fraction": 0.22217153284671534,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.4051094890510949,
+                            0.0,
+                            0.4324817518248175
+                        ]
+                    }
+                },
+                "output_bias": 0.15106318891048431,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.3803317535545024,
+                        "exact_zero_fraction": 0.09123222748815166,
+                        "near_zero_fraction": 0.4674170616113744,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.20853080568720378,
+                            0.0,
+                            0.0,
+                            0.26066350710900477,
+                            0.26066350710900477
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.15106318891048431,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            }
+        },
+        "raw_arrays": "results/artifacts_2026_09_13_15_47_08_lgsigmoid/forward_and_relevance_lgsigmoid.npz"
+    },
+    "plots": {
+        "activation_diagnostics": "reports/activation diagnostics/activation_diagnostics_2026_09_13_15_47_08_lgsigmoid.png",
+        "model_comparison": {
+            "baseline": "reports/model comparisons/compare_baseline_2026_09_13_15_47_08_lgsigmoid.png",
+            "shortcut": "reports/model comparisons/compare_shortcut_2026_09_13_15_47_08_lgsigmoid.png"
+        },
+        "lrp_heatmaps": {
+            "baseline": "reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_47_08_lgsigmoid.png",
+            "shortcut": "reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_47_08_lgsigmoid.png"
+        },
+        "lrp_line_maps": {
+            "baseline": "reports/lrp line maps/lrp_line_baseline_2026_09_13_15_47_08_lgsigmoid.png",
+            "shortcut": "reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_47_08_lgsigmoid.png"
+        },
+        "lrp_shortcut_scatters": {
+            "normal": "reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_47_08_lgsigmoid.png",
+            "zeroed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_47_08_lgsigmoid.png",
+            "noise": "reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_47_08_lgsigmoid.png",
+            "reversed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_47_08_lgsigmoid.png",
+            "permuted": "reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_47_08_lgsigmoid.png"
+        }
+    }
+}

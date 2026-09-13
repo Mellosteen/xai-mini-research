@@ -1,0 +1,477 @@
+{
+    "time_data": {
+        "n_samples": 3650,
+        "noise_level": 0.05,
+        "training_ratio": 0.7,
+        "val_ratio": 0.15,
+        "test_ratio": 0.15,
+        "data_seed": 42,
+        "shortcut": true,
+        "shortcut_fit_split": "train_val",
+        "shortcut_deg": 20
+    },
+    "models": {
+        "linear_regression": {
+            "metrics": {
+                "train": {
+                    "mae": 1.0096916544113133,
+                    "rmse": 1.293353101320676,
+                    "r2": 0.992781607786372
+                },
+                "val": {
+                    "mae": 2.5110545746011215,
+                    "rmse": 2.7966586748573037,
+                    "r2": 0.7497267768320507
+                },
+                "test": {
+                    "mae": 3.2841546571167113,
+                    "rmse": 3.676044010079359,
+                    "r2": 0.6917521658893317
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 1.018802611004886,
+                    "rmse": 1.2919878193783418,
+                    "r2": 0.9927968394178863
+                },
+                "val": {
+                    "mae": 2.2635480659935987,
+                    "rmse": 2.5168282862538938,
+                    "r2": 0.7973051897837571
+                },
+                "test": {
+                    "mae": 12219.628665962855,
+                    "rmse": 28532.680544809362,
+                    "r2": -18570506.712731756
+                }
+            }
+        },
+        "kernel_rr": {
+            "params": {
+                "alpha": 0.001,
+                "gamma": 0.001
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0667229999023759,
+                    "rmse": 0.08477434884922382,
+                    "r2": 0.9999689876138043
+                },
+                "val": {
+                    "mae": 0.130172300792941,
+                    "rmse": 0.172740283718569,
+                    "r2": 0.9990451773475195
+                },
+                "test": {
+                    "mae": 0.4961809900601458,
+                    "rmse": 0.5798898894354125,
+                    "r2": 0.9923293935220656
+                }
+            },
+            "shortcut_params": {
+                "alpha": 0.005,
+                "gamma": 0.001
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.1820060877583984,
+                    "rmse": 0.21602434472995843,
+                    "r2": 0.9997986221725516
+                },
+                "val": {
+                    "mae": 0.16518642382544962,
+                    "rmse": 0.19969103004678204,
+                    "r2": 0.9987239944276418
+                },
+                "test": {
+                    "mae": 59.52533509531257,
+                    "rmse": 63.616731507881426,
+                    "r2": -91.31692579741842
+                }
+            }
+        },
+        "mlp": {
+            "params": {
+                "learning_rate": 0.01,
+                "epochs": 50,
+                "patience": 5,
+                "seed": 42
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.2663316052655961,
+                    "rmse": 0.33602932017213305,
+                    "r2": 0.9995127401749739
+                },
+                "val": {
+                    "mae": 0.36404840218224754,
+                    "rmse": 0.5058073543671752,
+                    "r2": 0.9918133591932436
+                },
+                "test": {
+                    "mae": 1.544807908685073,
+                    "rmse": 1.8698571640369492,
+                    "r2": 0.9202454452899647
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.31521391187375447,
+                    "rmse": 0.3973052987110191,
+                    "r2": 0.9993188308470655
+                },
+                "val": {
+                    "mae": 0.6326651921446653,
+                    "rmse": 0.7848481822720494,
+                    "r2": 0.9802890856780951
+                },
+                "test": {
+                    "mae": 79428.10150559683,
+                    "rmse": 186181.46389118704,
+                    "r2": -790699583.9033296
+                }
+            },
+            "lrp": {
+                "baseline": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality"
+                    ],
+                    "output_mean": 67.84345245361328,
+                    "output_std": 5.467494487762451,
+                    "total_mean_abs_relevance": 0.6543798446655273,
+                    "shortcut_relevance_share": null,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.20926344394683838,
+                            "mean_signed_relevance": 0.20926344394683838,
+                            "relevance_share": 0.31978896260261536
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.38602593541145325,
+                            "mean_signed_relevance": 0.38602593541145325,
+                            "relevance_share": 0.5899111032485962
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.0590905100107193,
+                            "mean_signed_relevance": 0.012644428759813309,
+                            "relevance_share": 0.09030001610517502
+                        }
+                    }
+                },
+                "shortcut": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality",
+                        "shortcut_polynomial"
+                    ],
+                    "output_mean": 79391.8828125,
+                    "output_std": 168441.828125,
+                    "total_mean_abs_relevance": 1.8625284433364868,
+                    "shortcut_relevance_share": 0.7639297246932983,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.2158506065607071,
+                            "mean_signed_relevance": 0.06361491233110428,
+                            "relevance_share": 0.11589117348194122
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.21027067303657532,
+                            "mean_signed_relevance": 0.050815388560295105,
+                            "relevance_share": 0.11289528012275696
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.013566273264586926,
+                            "mean_signed_relevance": 0.006957036908715963,
+                            "relevance_share": 0.0072837937623262405
+                        },
+                        "shortcut_polynomial": {
+                            "mean_abs_relevance": 1.4228408336639404,
+                            "mean_signed_relevance": 0.776232898235321,
+                            "relevance_share": 0.7639297246932983
+                        }
+                    }
+                }
+            },
+            "interventions": {
+                "target_model": "shortcut_mlp",
+                "split": "test",
+                "feature_space": "scaled",
+                "changed_feature": "shortcut_polynomial",
+                "conditions": {
+                    "normal": {
+                        "metrics": {
+                            "mae": 79428.10150559683,
+                            "rmse": 186181.46389118704,
+                            "r2": -790699583.9033296
+                        },
+                        "shortcut_relevance_share": 0.7639297246932983,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "normal",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 79391.8828125,
+                            "output_std": 168441.828125,
+                            "total_mean_abs_relevance": 1.8625284433364868,
+                            "shortcut_relevance_share": 0.7639297246932983,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.2158506065607071,
+                                    "mean_signed_relevance": 0.06361491233110428,
+                                    "relevance_share": 0.11589117348194122
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.21027067303657532,
+                                    "mean_signed_relevance": 0.050815388560295105,
+                                    "relevance_share": 0.11289528012275696
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.013566273264586926,
+                                    "mean_signed_relevance": 0.006957036908715963,
+                                    "relevance_share": 0.0072837937623262405
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 1.4228408336639404,
+                                    "mean_signed_relevance": 0.776232898235321,
+                                    "relevance_share": 0.7639297246932983
+                                }
+                            }
+                        }
+                    },
+                    "zeroed": {
+                        "metrics": {
+                            "mae": 11.115475413242999,
+                            "rmse": 11.442051296006861,
+                            "r2": -1.9863892267642553
+                        },
+                        "shortcut_relevance_share": 0.0,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "zeroed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 58.18043518066406,
+                            "output_std": 4.003942012786865,
+                            "total_mean_abs_relevance": 0.6172988414764404,
+                            "shortcut_relevance_share": 0.0,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.3241502344608307,
+                                    "mean_signed_relevance": 0.3241502344608307,
+                                    "relevance_share": 0.5251107215881348
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.24049778282642365,
+                                    "mean_signed_relevance": 0.24049778282642365,
+                                    "relevance_share": 0.38959699869155884
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.052650824189186096,
+                                    "mean_signed_relevance": 0.01868632063269615,
+                                    "relevance_share": 0.0852922797203064
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.0,
+                                    "mean_signed_relevance": 0.0,
+                                    "relevance_share": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "noise": {
+                        "metrics": {
+                            "mae": 11.116442249057219,
+                            "rmse": 12.089065344126022,
+                            "r2": -2.3336813042790423
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.08264221251010895,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "noise",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 58.21731185913086,
+                            "output_std": 5.593217849731445,
+                            "total_mean_abs_relevance": 0.6742632985115051,
+                            "shortcut_relevance_share": 0.08264221251010895,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.3247915804386139,
+                                    "mean_signed_relevance": 0.3247915804386139,
+                                    "relevance_share": 0.4816984534263611
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.24122914671897888,
+                                    "mean_signed_relevance": 0.24122914671897888,
+                                    "relevance_share": 0.3577669858932495
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.052519991993904114,
+                                    "mean_signed_relevance": 0.0186451468616724,
+                                    "relevance_share": 0.07789240777492523
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.05572260916233063,
+                                    "mean_signed_relevance": -0.00275781168602407,
+                                    "relevance_share": 0.08264221251010895
+                                }
+                            }
+                        }
+                    },
+                    "reversed": {
+                        "metrics": {
+                            "mae": 6226.527666054007,
+                            "rmse": 13773.899256760646,
+                            "r2": -4327652.028882005
+                        },
+                        "shortcut_relevance_share": 0.8808708190917969,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "reversed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": -5476.33837890625,
+                            "output_std": 12604.5244140625,
+                            "total_mean_abs_relevance": 0.99041348695755,
+                            "shortcut_relevance_share": 0.8808708190917969,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.06003149226307869,
+                                    "mean_signed_relevance": 0.05834953859448433,
+                                    "relevance_share": 0.06061255559325218
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.05019788071513176,
+                                    "mean_signed_relevance": 0.04781448096036911,
+                                    "relevance_share": 0.05068376287817955
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.007757783867418766,
+                                    "mean_signed_relevance": 0.006498479284346104,
+                                    "relevance_share": 0.007832873612642288
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.8724263310432434,
+                                    "mean_signed_relevance": 0.8082228899002075,
+                                    "relevance_share": 0.8808708190917969
+                                }
+                            }
+                        }
+                    },
+                    "permuted": {
+                        "metrics": {
+                            "mae": 79430.35755846389,
+                            "rmse": 186183.13705723555,
+                            "r2": -790713795.6042906
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.7154305577278137,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "permuted",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 79391.359375,
+                            "output_std": 168440.234375,
+                            "total_mean_abs_relevance": 3.0259311199188232,
+                            "shortcut_relevance_share": 0.7154305577278137,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.42554333806037903,
+                                    "mean_signed_relevance": -0.15725217759609222,
+                                    "relevance_share": 0.14063219726085663
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.4229259192943573,
+                                    "mean_signed_relevance": -0.17426297068595886,
+                                    "relevance_share": 0.13976719975471497
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.012618388049304485,
+                                    "mean_signed_relevance": 0.0001667215838097036,
+                                    "relevance_share": 0.004170084372162819
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 2.1648435592651367,
+                                    "mean_signed_relevance": 1.6213719844818115,
+                                    "relevance_share": 0.7154305577278137
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "plots": {
+        "model_comparison": {
+            "baseline": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/model comparisons/compare_baseline_2026_09_10_08_32_06.png",
+            "shortcut": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/model comparisons/compare_shortcut_2026_09_10_08_32_06.png"
+        },
+        "lrp_heatmaps": {
+            "baseline": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_10_08_32_06.png",
+            "shortcut": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_10_08_32_06.png"
+        },
+        "lrp_line_maps": {
+            "baseline": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp line maps/lrp_line_baseline_2026_09_10_08_32_06.png",
+            "shortcut": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp line maps/lrp_line_shortcut_2026_09_10_08_32_06.png"
+        },
+        "lrp_shortcut_scatters": {
+            "normal": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_10_08_32_06.png",
+            "zeroed": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_10_08_32_06.png",
+            "noise": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_10_08_32_06.png",
+            "reversed": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_10_08_32_06.png",
+            "permuted": "/Users/aqiu22/Documents/PersonalProjects/xai-mini-research/reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_10_08_32_06.png"
+        }
+    }
+}

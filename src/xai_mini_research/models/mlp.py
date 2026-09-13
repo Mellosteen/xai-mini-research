@@ -20,18 +20,38 @@ class MLPRegressor(nn.Module):
     8 features upon passing into the first hidden layer, 4 features upon passing into the second before converging the outputs
     into one in the output layer.
 
+    Args:
+        input_dim (Integer): Number of input features, 3 for the baseline or 4 with the shortcut.
+        hidden_dim_1 (Integer): Number of units in the first hidden layer. Default is 8.
+        hidden_dim_2 (Integer): Number of units in the second hidden layer. Default is 4.
+        activation (String): Activation used after both hidden layers. Accepts 'relu',
+            'lgsigmoid' (LogSigmoid), or 'gelu'. GELU remains the default.
+
     Attributes:
         network (nn.Sequential): The construction of the entire neural network. The number of input dimensions begins with 3, but remains
         required for when shortcuts are added.
     """
-    def __init__(self, input_dim, hidden_dim_1=8, hidden_dim_2=4, ):
+    def __init__(self, input_dim, hidden_dim_1=8, hidden_dim_2=4, activation="gelu"):
         super().__init__()
 
+        # Select the same activation type for both hidden layers.
+        if activation == "relu":
+            activation_function = nn.ReLU
+        elif activation == "lgsigmoid":
+            activation_function = nn.LogSigmoid
+        elif activation == "gelu":
+            activation_function = nn.GELU
+        else:
+            raise ValueError("Unknown activation. Please provide 'relu', 'lgsigmoid', or 'gelu'.")
+
+        self.activation_name = activation
+
+        # Each call to activation_function() creates a separate activation module.
         self.network = nn.Sequential(
             nn.Linear(in_features=input_dim, out_features=hidden_dim_1),
-            nn.ReLU(),
+            activation_function(),
             nn.Linear(in_features=hidden_dim_1, out_features=hidden_dim_2),
-            nn.ReLU(),
+            activation_function(),
             nn.Linear(in_features=hidden_dim_2, out_features=1)
         )
 

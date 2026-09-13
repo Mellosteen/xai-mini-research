@@ -1,0 +1,1075 @@
+{
+    "provenance": {
+        "run_id": "2026_09_13_15_47_33_gelu",
+        "activation": "GELU",
+        "activation_slug": "gelu",
+        "git_commit": "e73c793b0aff73d3196f3dcf31e289e1b63d80af",
+        "working_tree_dirty": true,
+        "git_status_at_start": [
+            "M README.md",
+            " M src/xai_mini_research/experiments/compare_models.py",
+            " M src/xai_mini_research/models/mlp.py",
+            "?? reports/Final_Report.md",
+            "?? \"reports/activation diagnostics/\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_13_15_46_44_relu.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_13_15_47_08_lgsigmoid.png\"",
+            "?? results/artifacts_2026_09_13_15_46_44_relu/",
+            "?? results/artifacts_2026_09_13_15_47_08_lgsigmoid/",
+            "?? results/artifacts_2026_09_13_15_47_33_gelu/",
+            "?? results/model_comparison_2026_09_08_07_42_57.json",
+            "?? results/model_comparison_2026_09_09_10_00_11.json",
+            "?? results/model_comparison_2026_09_09_10_02_17.json",
+            "?? results/model_comparison_2026_09_10_08_32_06.json",
+            "?? results/model_comparison_2026_09_13_15_46_44_relu.json",
+            "?? results/model_comparison_2026_09_13_15_47_08_lgsigmoid.json",
+            "?? src/xai_mini_research/diagnostics.py",
+            "?? tests/test_activation_diagnostics.py"
+        ],
+        "source_sha256": {
+            "src/xai_mini_research/__init__.py": "52e627b83655f374287188faf071fbf61d3d7b84bb5249513c5f2d85b0ee21ea",
+            "src/xai_mini_research/config.py": "4e521273459bee94e3ce5c9de3e02cd15bffbd0607e2d1f833e2a5d90c20f4e1",
+            "src/xai_mini_research/data.py": "81fc057f541b5d8e465f1223479d5ebc2795fef8ff27836ff61c455a66b3d15b",
+            "src/xai_mini_research/diagnostics.py": "ef5a6d2a708bb886498788baa278da9dad8c0f2ab4f8514837ac71dfd3106fcb",
+            "src/xai_mini_research/experiments/__init__.py": "31f5661b3e5a88f6b898bb8e51e016906e47b9e8c7cccec716e8175d3028701f",
+            "src/xai_mini_research/experiments/compare_models.py": "67c4bba0fca66f8be08ec4decb2b6047b8c54e6637a5586f63ead2307afb40c0",
+            "src/xai_mini_research/explain.py": "e097cb49f52460482ab90eae9ad3dd70a6f20a6ecff8dd7a80da60f71ba74878",
+            "src/xai_mini_research/interventions.py": "9daeb3f76aa68271d801dfb3c5c076ced6ef1baa26175ca9ea6aeded88f9a51a",
+            "src/xai_mini_research/metrics.py": "4cb3bb89b702a1c4555701e9383dce260c6e804cc6a5dc7e054a1056d060d052",
+            "src/xai_mini_research/models/__init__.py": "6be10a5c09af1c6324cfd9dc42d2aee4ab9638bc41aa74ad8005a03b2e309f1b",
+            "src/xai_mini_research/models/krr.py": "1126c114fa1ea3b020ca2bce543eef17f342cf314d93514decd307da4943a50b",
+            "src/xai_mini_research/models/linear.py": "00adf9bc32e5a8dc9644d50f927394ddb1afd1787aba83cff9bdb7ea33cfb840",
+            "src/xai_mini_research/models/mlp.py": "ed60c358c9b942e7e32b13dc4db669e52369f5aee949c442e4b1100c8c0e4ebf",
+            "src/xai_mini_research/preprocessing.py": "9a2cbcf85cbd7ecf0fa13f2b73c1e475c40c471e9cec524c59e974120b6d36c7",
+            "src/xai_mini_research/results.py": "db14cfd344a39ce2eae5f8bc33e66fb870991da05407b4c9772c76f1a8c2a8ab",
+            "requirements.txt": "12ecd54cbbca0aeea5a584f67fad5092d08d327f9c6600c7706ff2202e64dff0",
+            "configs/default.yaml": "fbc1023bbf96838ef06e782d9a4f80fde1b341702b91a15f1ce63a3cde8ed995"
+        },
+        "source_archive": "results/artifacts_2026_09_13_15_47_33_gelu/source.zip",
+        "versions": {
+            "torch": "2.13.0",
+            "numpy": "2.5.1",
+            "scikit-learn": "1.9.0",
+            "zennit": "1.0.0",
+            "matplotlib": "3.11.1"
+        },
+        "device": "cpu",
+        "torch_num_threads": 4,
+        "command": "PYTHONPATH=src python -m xai_mini_research.experiments.compare_models --activation gelu"
+    },
+    "time_data": {
+        "n_samples": 3650,
+        "noise_level": 0.05,
+        "training_ratio": 0.7,
+        "val_ratio": 0.15,
+        "test_ratio": 0.15,
+        "data_seed": 42,
+        "shortcut": true,
+        "shortcut_fit_split": "train_val",
+        "shortcut_deg": 20
+    },
+    "models": {
+        "linear_regression": {
+            "metrics": {
+                "train": {
+                    "mae": 1.0096916544113133,
+                    "rmse": 1.293353101320676,
+                    "r2": 0.992781607786372
+                },
+                "val": {
+                    "mae": 2.5110545746011215,
+                    "rmse": 2.7966586748573037,
+                    "r2": 0.7497267768320507
+                },
+                "test": {
+                    "mae": 3.2841546571167113,
+                    "rmse": 3.676044010079359,
+                    "r2": 0.6917521658893317
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 1.018802611004886,
+                    "rmse": 1.2919878193783418,
+                    "r2": 0.9927968394178863
+                },
+                "val": {
+                    "mae": 2.2635480659935987,
+                    "rmse": 2.5168282862538938,
+                    "r2": 0.7973051897837571
+                },
+                "test": {
+                    "mae": 12219.628665962855,
+                    "rmse": 28532.680544809362,
+                    "r2": -18570506.712731756
+                }
+            }
+        },
+        "kernel_rr": {
+            "params": {
+                "alpha": 0.001,
+                "gamma": 0.001
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0667229999023759,
+                    "rmse": 0.08477434884922382,
+                    "r2": 0.9999689876138043
+                },
+                "val": {
+                    "mae": 0.130172300792941,
+                    "rmse": 0.172740283718569,
+                    "r2": 0.9990451773475195
+                },
+                "test": {
+                    "mae": 0.4961809900601458,
+                    "rmse": 0.5798898894354125,
+                    "r2": 0.9923293935220656
+                }
+            },
+            "shortcut_params": {
+                "alpha": 0.005,
+                "gamma": 0.001
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.1820060877583984,
+                    "rmse": 0.21602434472995843,
+                    "r2": 0.9997986221725516
+                },
+                "val": {
+                    "mae": 0.16518642382544962,
+                    "rmse": 0.19969103004678204,
+                    "r2": 0.9987239944276418
+                },
+                "test": {
+                    "mae": 59.52533509531257,
+                    "rmse": 63.616731507881426,
+                    "r2": -91.31692579741842
+                }
+            }
+        },
+        "mlp": {
+            "params": {
+                "activation": "GELU",
+                "hidden_dimensions": [
+                    8,
+                    4
+                ],
+                "batch_size": 32,
+                "optimizer": "Adam",
+                "optimizer_defaults": {
+                    "lr": 0.01,
+                    "betas": [
+                        0.9,
+                        0.999
+                    ],
+                    "eps": 1e-08,
+                    "weight_decay": 0,
+                    "amsgrad": false,
+                    "maximize": false,
+                    "foreach": null,
+                    "capturable": false,
+                    "differentiable": false,
+                    "fused": null,
+                    "decoupled_weight_decay": false
+                },
+                "loss": "MSELoss",
+                "min_delta": 0.0001,
+                "learning_rate": 0.01,
+                "epochs": 50,
+                "patience": 5,
+                "seed": 42
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.2663316052655961,
+                    "rmse": 0.33602932017213305,
+                    "r2": 0.9995127401749739
+                },
+                "val": {
+                    "mae": 0.36404840218224754,
+                    "rmse": 0.5058073543671752,
+                    "r2": 0.9918133591932436
+                },
+                "test": {
+                    "mae": 1.544807908685073,
+                    "rmse": 1.8698571640369492,
+                    "r2": 0.9202454452899647
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.31521391187375447,
+                    "rmse": 0.3973052987110191,
+                    "r2": 0.9993188308470655
+                },
+                "val": {
+                    "mae": 0.6326651921446653,
+                    "rmse": 0.7848481822720494,
+                    "r2": 0.9802890856780951
+                },
+                "test": {
+                    "mae": 79428.10150559683,
+                    "rmse": 186181.46389118704,
+                    "r2": -790699583.9033296
+                }
+            },
+            "lrp": {
+                "baseline": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality"
+                    ],
+                    "output_mean": 67.84345245361328,
+                    "output_std": 5.467494487762451,
+                    "total_mean_abs_relevance": 0.6543798446655273,
+                    "shortcut_relevance_share": null,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.20926344394683838,
+                            "mean_signed_relevance": 0.20926344394683838,
+                            "relevance_share": 0.31978896260261536
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.38602593541145325,
+                            "mean_signed_relevance": 0.38602593541145325,
+                            "relevance_share": 0.5899111032485962
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.0590905100107193,
+                            "mean_signed_relevance": 0.012644428759813309,
+                            "relevance_share": 0.09030001610517502
+                        }
+                    }
+                },
+                "shortcut": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality",
+                        "shortcut_polynomial"
+                    ],
+                    "output_mean": 79391.8828125,
+                    "output_std": 168441.828125,
+                    "total_mean_abs_relevance": 1.8625284433364868,
+                    "shortcut_relevance_share": 0.7639297246932983,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.2158506065607071,
+                            "mean_signed_relevance": 0.06361491233110428,
+                            "relevance_share": 0.11589117348194122
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.21027067303657532,
+                            "mean_signed_relevance": 0.050815388560295105,
+                            "relevance_share": 0.11289528012275696
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.013566273264586926,
+                            "mean_signed_relevance": 0.006957036908715963,
+                            "relevance_share": 0.0072837937623262405
+                        },
+                        "shortcut_polynomial": {
+                            "mean_abs_relevance": 1.4228408336639404,
+                            "mean_signed_relevance": 0.776232898235321,
+                            "relevance_share": 0.7639297246932983
+                        }
+                    }
+                }
+            },
+            "interventions": {
+                "target_model": "shortcut_mlp",
+                "split": "test",
+                "feature_space": "scaled",
+                "changed_feature": "shortcut_polynomial",
+                "conditions": {
+                    "normal": {
+                        "metrics": {
+                            "mae": 79428.10150559683,
+                            "rmse": 186181.46389118704,
+                            "r2": -790699583.9033296
+                        },
+                        "shortcut_relevance_share": 0.7639297246932983,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "normal",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 79391.8828125,
+                            "output_std": 168441.828125,
+                            "total_mean_abs_relevance": 1.8625284433364868,
+                            "shortcut_relevance_share": 0.7639297246932983,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.2158506065607071,
+                                    "mean_signed_relevance": 0.06361491233110428,
+                                    "relevance_share": 0.11589117348194122
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.21027067303657532,
+                                    "mean_signed_relevance": 0.050815388560295105,
+                                    "relevance_share": 0.11289528012275696
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.013566273264586926,
+                                    "mean_signed_relevance": 0.006957036908715963,
+                                    "relevance_share": 0.0072837937623262405
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 1.4228408336639404,
+                                    "mean_signed_relevance": 0.776232898235321,
+                                    "relevance_share": 0.7639297246932983
+                                }
+                            }
+                        }
+                    },
+                    "zeroed": {
+                        "metrics": {
+                            "mae": 11.115475413242999,
+                            "rmse": 11.442051296006861,
+                            "r2": -1.9863892267642553
+                        },
+                        "shortcut_relevance_share": 0.0,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "zeroed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 58.18043518066406,
+                            "output_std": 4.003942012786865,
+                            "total_mean_abs_relevance": 0.6172988414764404,
+                            "shortcut_relevance_share": 0.0,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.3241502344608307,
+                                    "mean_signed_relevance": 0.3241502344608307,
+                                    "relevance_share": 0.5251107215881348
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.24049778282642365,
+                                    "mean_signed_relevance": 0.24049778282642365,
+                                    "relevance_share": 0.38959699869155884
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.052650824189186096,
+                                    "mean_signed_relevance": 0.01868632063269615,
+                                    "relevance_share": 0.0852922797203064
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.0,
+                                    "mean_signed_relevance": 0.0,
+                                    "relevance_share": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "noise": {
+                        "metrics": {
+                            "mae": 11.116442249057219,
+                            "rmse": 12.089065344126022,
+                            "r2": -2.3336813042790423
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.08264221251010895,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "noise",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 58.21731185913086,
+                            "output_std": 5.593217849731445,
+                            "total_mean_abs_relevance": 0.6742632985115051,
+                            "shortcut_relevance_share": 0.08264221251010895,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.3247915804386139,
+                                    "mean_signed_relevance": 0.3247915804386139,
+                                    "relevance_share": 0.4816984534263611
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.24122914671897888,
+                                    "mean_signed_relevance": 0.24122914671897888,
+                                    "relevance_share": 0.3577669858932495
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.052519991993904114,
+                                    "mean_signed_relevance": 0.0186451468616724,
+                                    "relevance_share": 0.07789240777492523
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.05572260916233063,
+                                    "mean_signed_relevance": -0.00275781168602407,
+                                    "relevance_share": 0.08264221251010895
+                                }
+                            }
+                        }
+                    },
+                    "reversed": {
+                        "metrics": {
+                            "mae": 6226.527666054007,
+                            "rmse": 13773.899256760646,
+                            "r2": -4327652.028882005
+                        },
+                        "shortcut_relevance_share": 0.8808708190917969,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "reversed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": -5476.33837890625,
+                            "output_std": 12604.5244140625,
+                            "total_mean_abs_relevance": 0.99041348695755,
+                            "shortcut_relevance_share": 0.8808708190917969,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.06003149226307869,
+                                    "mean_signed_relevance": 0.05834953859448433,
+                                    "relevance_share": 0.06061255559325218
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.05019788071513176,
+                                    "mean_signed_relevance": 0.04781448096036911,
+                                    "relevance_share": 0.05068376287817955
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.007757783867418766,
+                                    "mean_signed_relevance": 0.006498479284346104,
+                                    "relevance_share": 0.007832873612642288
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.8724263310432434,
+                                    "mean_signed_relevance": 0.8082228899002075,
+                                    "relevance_share": 0.8808708190917969
+                                }
+                            }
+                        }
+                    },
+                    "permuted": {
+                        "metrics": {
+                            "mae": 79430.35755846389,
+                            "rmse": 186183.13705723555,
+                            "r2": -790713795.6042906
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.7154305577278137,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "permuted",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 79391.359375,
+                            "output_std": 168440.234375,
+                            "total_mean_abs_relevance": 3.0259311199188232,
+                            "shortcut_relevance_share": 0.7154305577278137,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.42554333806037903,
+                                    "mean_signed_relevance": -0.15725217759609222,
+                                    "relevance_share": 0.14063219726085663
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.4229259192943573,
+                                    "mean_signed_relevance": -0.17426297068595886,
+                                    "relevance_share": 0.13976719975471497
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.012618388049304485,
+                                    "mean_signed_relevance": 0.0001667215838097036,
+                                    "relevance_share": 0.004170084372162819
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 2.1648435592651367,
+                                    "mean_signed_relevance": 1.6213719844818115,
+                                    "relevance_share": 0.7154305577278137
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "training": {
+                "baseline": {
+                    "completed_epochs": 14,
+                    "train_losses": [
+                        588.6584995426543,
+                        24.713157291281714,
+                        1.7825735831913883,
+                        0.49538823062892995,
+                        0.29284850797541223,
+                        0.2220835217232807,
+                        0.1757240203145432,
+                        0.13962875243618997,
+                        0.12032176943499515,
+                        0.11334715736938783,
+                        0.10798911677123049,
+                        0.10408600717782975,
+                        0.10186492652284189,
+                        0.0959886631153801
+                    ],
+                    "val_losses": [
+                        9.870354960561889,
+                        2.228724946732713,
+                        1.49468785333677,
+                        1.0508722050534305,
+                        0.6324744162982299,
+                        0.6134927262036195,
+                        0.6102421858247499,
+                        0.32476399778992865,
+                        0.25584102810191933,
+                        0.2638649866938373,
+                        0.5805918305186074,
+                        0.4102249422827412,
+                        0.3672931787627707,
+                        0.3272760575756403
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_47_33_gelu/baseline_gelu.pt"
+                },
+                "shortcut": {
+                    "completed_epochs": 27,
+                    "train_losses": [
+                        542.14700437124,
+                        21.186909884249395,
+                        1.481299015477212,
+                        0.6130280577623214,
+                        0.3800011029682047,
+                        0.2847222790559444,
+                        0.25430630943546556,
+                        0.23297345913552958,
+                        0.2262348865109647,
+                        0.21966379807419972,
+                        0.2037785871271518,
+                        0.19475764270339693,
+                        0.18987618625280675,
+                        0.18826570567436182,
+                        0.17976683916527697,
+                        0.16789189665168233,
+                        0.15845803839469844,
+                        0.1673166116098135,
+                        0.1540988299040645,
+                        0.17361774729189342,
+                        0.14819224271522344,
+                        0.14419492387491664,
+                        0.13042916749438194,
+                        0.12755278932721648,
+                        0.11320283876298225,
+                        0.11175239015582022,
+                        0.11857089367631364
+                    ],
+                    "val_losses": [
+                        433.7061315672489,
+                        14.125496012637123,
+                        4.510582807131615,
+                        3.2803105528873324,
+                        2.0137696424720493,
+                        1.622274556423672,
+                        1.3406424475271916,
+                        1.5334322711340471,
+                        2.152085334008093,
+                        1.3945703996818724,
+                        1.173677467558894,
+                        1.1775673825899906,
+                        2.064702343788182,
+                        1.9110445842228598,
+                        2.1152907968439174,
+                        1.0680384447413345,
+                        1.3618376805860775,
+                        0.6852517451621061,
+                        2.2101618885122227,
+                        1.2713146078684647,
+                        0.8629053234236768,
+                        0.6159867699261434,
+                        1.4961649208879557,
+                        1.1578024057245777,
+                        0.928653438740718,
+                        1.5803278771244411,
+                        1.1239165994977167
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_47_33_gelu/shortcut_gelu.pt"
+                }
+            },
+            "attribution_rules": {
+                "epsilon": 1e-06,
+                "output_seed": "ones_like",
+                "layers": [
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "GELU",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "GELU",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    }
+                ]
+            }
+        }
+    },
+    "activation_diagnostics": {
+        "baseline": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.602054794520548,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.3549902152641879,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.4266546964645386,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.4513254113345521,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.4266546964645386,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.41628649635036497,
+                        "exact_zero_fraction": 0.04744525547445255,
+                        "near_zero_fraction": 0.04744525547445255,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.3795620437956204,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.4266546964645386,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.37855450236966826,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.4266546964645386,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            }
+        },
+        "shortcut": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.225,
+                        "exact_zero_fraction": 0.00014677103718199608,
+                        "near_zero_fraction": 0.00014677103718199608,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0011741682974559687,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.46775779128074646,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.1796160877513711,
+                        "exact_zero_fraction": 0.125,
+                        "near_zero_fraction": 0.125,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            4
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.0,
+                        "exact_zero_fraction": 0.0,
+                        "near_zero_fraction": 0.0,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.46775779128074646,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.4607664233576642,
+                        "exact_zero_fraction": 0.42883211678832117,
+                        "near_zero_fraction": 0.42883211678832117,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.4032846715328467,
+                            0.40145985401459855,
+                            0.3777372262773723,
+                            0.4470802919708029,
+                            0.5072992700729927,
+                            0.395985401459854,
+                            0.4489051094890511,
+                            0.4489051094890511
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25775547445255476,
+                        "exact_zero_fraction": 0.239507299270073,
+                        "near_zero_fraction": 0.239507299270073,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.3156934306569343,
+                            0.33211678832116787,
+                            0.3102189781021898
+                        ]
+                    }
+                },
+                "output_bias": 0.46775779128074646,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.5,
+                        "exact_zero_fraction": 0.49703791469194314,
+                        "near_zero_fraction": 0.49703791469194314,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0,
+                            1,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            1.0,
+                            0.976303317535545,
+                            0.0,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.669431279620853,
+                        "exact_zero_fraction": 0.6220379146919431,
+                        "near_zero_fraction": 0.6220379146919431,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.8199052132701422,
+                            0.8625592417061612,
+                            0.8056872037914692
+                        ]
+                    }
+                },
+                "output_bias": 0.46775779128074646,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            }
+        },
+        "raw_arrays": "results/artifacts_2026_09_13_15_47_33_gelu/forward_and_relevance_gelu.npz"
+    },
+    "plots": {
+        "activation_diagnostics": "reports/activation diagnostics/activation_diagnostics_2026_09_13_15_47_33_gelu.png",
+        "model_comparison": {
+            "baseline": "reports/model comparisons/compare_baseline_2026_09_13_15_47_33_gelu.png",
+            "shortcut": "reports/model comparisons/compare_shortcut_2026_09_13_15_47_33_gelu.png"
+        },
+        "lrp_heatmaps": {
+            "baseline": "reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_47_33_gelu.png",
+            "shortcut": "reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_47_33_gelu.png"
+        },
+        "lrp_line_maps": {
+            "baseline": "reports/lrp line maps/lrp_line_baseline_2026_09_13_15_47_33_gelu.png",
+            "shortcut": "reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_47_33_gelu.png"
+        },
+        "lrp_shortcut_scatters": {
+            "normal": "reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_47_33_gelu.png",
+            "zeroed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_47_33_gelu.png",
+            "noise": "reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_47_33_gelu.png",
+            "reversed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_47_33_gelu.png",
+            "permuted": "reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_47_33_gelu.png"
+        }
+    }
+}

@@ -2,6 +2,10 @@
 This file is created and intended for a quick test & comparison of the metrics
 of the linear regression model vs. kernel ridge regression model vs. MLP regression model.
 """
+import argparse
+
+import numpy as np
+from zennit.composites import EpsilonPlus
 from datetime import datetime
 from pathlib import Path
 
@@ -9,6 +13,9 @@ import matplotlib.pyplot as plt
 import torch
 from xai_mini_research import generate_time_data, preprocess, regression_metrics_all_splits, save_results, summarize_lrp_relevance, summarize_mlp_lrp, explain_mlp_lrp, intervene_scaled_shortcut, regression_metrics
 from xai_mini_research.models import train_mlp, train_linear_model, predict_mlp_splits, predict_splits, MLPRegressor, set_torch_seed, train_krr_model, predict_krr_splits
+
+from xai_mini_research.diagnostics import inspect_hidden_activations, plot_activation_diagnostics
+from xai_mini_research.results import save_experiment_details, save_mlp_training
 
 def print_metrics(name: str, metrics: dict):
     print(f"\n{name}")
@@ -26,7 +33,7 @@ def print_metrics_all_splits(name: str, metrics: dict):
             f"{split_metrics['r2']:.4f}"
         )
 
-def save_plot(fig, subdir: str, filename: str):
+def save_plot(fig, subdir: str, filename: str, activation=None):
     """
     Save a matplotlib figure under the project's reports directory.
     """
@@ -34,6 +41,9 @@ def save_plot(fig, subdir: str, filename: str):
     output_dir = project_root / "reports" / subdir
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / filename
+    if activation is not None:
+        fig.suptitle(f"Activation: {activation}")
+        fig.tight_layout()
     fig.savefig(output_path, dpi=200, bbox_inches="tight")
     return output_path
 
@@ -264,8 +274,29 @@ def choose_best_krr(processed_data):
     return best_model, best_params, best_metrics, best_predictions
                 
 
-def main():
-    run_id = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+def main(activation="gelu"):
+    """
+    Run the model comparison for one activation and save its metrics and figures.
+
+    Args:
+        activation (String): 'relu', 'lgsigmoid' (LogSigmoid), or 'gelu'. The same
+            activation is used for the baseline and shortcut MLP in this run.
+    """
+    # Experiment name: the suffix identifies the activation in every output file.
+    activation_labels = {"relu": "ReLU", "lgsigmoid": "LogSigmoid", "gelu": "GELU"}
+    activation_label = activation_labels[activation]
+    run_id = datetime.now().strftime("%Y_%m_%d_%H_%M_%S") + f"_{activation}"
+    project_root = Path(__file__).resolve().parents[3]
+    artifact_dir = project_root / "results" / f"artifacts_{run_id}"
+    experiment_details = save_experiment_details(
+        project_root=project_root,
+        artifact_dir=artifact_dir,
+        run_id=run_id,
+        activation=activation,
+        activation_label=activation_label,
+    )
+
+    # Data generation and preprocessing use the same settings for every activation.
     data_seed = 42
     n_samples = 3650
     noise_level = 0.05
@@ -300,15 +331,39 @@ def main():
     epochs = 50
     patience = 5
     set_torch_seed(seed=seed)
-    mlp_model = MLPRegressor(input_dim=processed_data["train"]["X_scaled"].shape[1])
-    train_mlp(model=mlp_model, processed_data=processed_data, optimizer=torch.optim.Adam(mlp_model.parameters(), lr=lr), criterion=torch.nn.MSELoss(), epochs=epochs, patience=patience, seed=seed)
+    mlp_model = MLPRegressor(
+        input_dim=processed_data["train"]["X_scaled"].shape[1],
+        activation=activation,
+    )
+    mlp_optimizer = torch.optim.Adam(mlp_model.parameters(), lr=lr)
+    clean_training = train_mlp(
+        model=mlp_model,
+        processed_data=processed_data,
+        optimizer=mlp_optimizer,
+        criterion=torch.nn.MSELoss(),
+        epochs=epochs,
+        patience=patience,
+        seed=seed,
+    )
     mlp_predictions = predict_mlp_splits(mlp_model, processed_data)
     mlp_metrics = regression_metrics_all_splits(processed_data, mlp_predictions)
 
     # MLP shortcut
     set_torch_seed(seed=seed)
-    mlp_shortcut_model = MLPRegressor(input_dim=processed_shortcut_data["train"]["X_scaled"].shape[1])
-    train_mlp(model=mlp_shortcut_model, processed_data=processed_shortcut_data, optimizer=torch.optim.Adam(mlp_shortcut_model.parameters(), lr=lr), criterion=torch.nn.MSELoss(), epochs=epochs, patience=patience, seed=seed)
+    mlp_shortcut_model = MLPRegressor(
+        input_dim=processed_shortcut_data["train"]["X_scaled"].shape[1],
+        activation=activation,
+    )
+    shortcut_optimizer = torch.optim.Adam(mlp_shortcut_model.parameters(), lr=lr)
+    shortcut_training = train_mlp(
+        model=mlp_shortcut_model,
+        processed_data=processed_shortcut_data,
+        optimizer=shortcut_optimizer,
+        criterion=torch.nn.MSELoss(),
+        epochs=epochs,
+        patience=patience,
+        seed=seed,
+    )
     mlp_shortcut_predictions = predict_mlp_splits(mlp_shortcut_model, processed_shortcut_data)
     mlp_shortcut_metrics = regression_metrics_all_splits(processed_shortcut_data, mlp_shortcut_predictions)
 
@@ -385,6 +440,7 @@ def main():
 
     # Saving results under results/
     results = {
+        "provenance": experiment_details,
         "time_data" : {
             "n_samples" : n_samples,
             "noise_level" : noise_level,
@@ -409,6 +465,13 @@ def main():
             },
             "mlp" : {
                 "params" : {
+                    "activation": activation_label,
+                    "hidden_dimensions": [8, 4],
+                    "batch_size": 32,
+                    "optimizer": "Adam",
+                    "optimizer_defaults": shortcut_optimizer.defaults,
+                    "loss": "MSELoss",
+                    "min_delta": 1e-4,
                     "learning_rate" : lr,
                     "epochs" : epochs,
                     "patience" : patience,
@@ -459,6 +522,99 @@ def main():
         }
     }
 
+    # Save the models and inspect their hidden layers after training.
+    results["models"]["mlp"]["training"] = {}
+    results["activation_diagnostics"] = {}
+    raw_arrays = {}
+    model_runs = [
+        ("baseline", mlp_model, processed_data, clean_training),
+        ("shortcut", mlp_shortcut_model, processed_shortcut_data, shortcut_training),
+    ]
+
+    for model_name, model, model_data, training_metrics in model_runs:
+        training_summary = save_mlp_training(
+            model=model,
+            processed_data=model_data,
+            training_metrics=training_metrics,
+            project_root=project_root,
+            artifact_dir=artifact_dir,
+            model_name=model_name,
+        )
+        results["models"]["mlp"]["training"][model_name] = training_summary
+        results["activation_diagnostics"][model_name] = {}
+
+        # Check every split using the final model weights, without retraining.
+        for split in ("train", "val", "test"):
+            split_data = model_data[split]
+            summary, arrays = inspect_hidden_activations(
+                model=model,
+                X=split_data["X_scaled"],
+                time=split_data["time"],
+            )
+            results["activation_diagnostics"][model_name][split] = summary
+
+            # Prefix array names so baseline and shortcut measurements stay separate.
+            for array_name, values in arrays.items():
+                saved_name = f"{model_name}_{split}_{array_name}"
+                raw_arrays[saved_name] = values
+            raw_arrays[f"{model_name}_{split}_target"] = split_data["y"]
+
+            if model_name == "shortcut" and split == "test":
+                test_shortcut_arrays = arrays
+
+        # The earlier ReLU plots identified this interval before the comparison runs.
+        test_time = model_data["test"]["time"]
+        flat_region = (test_time >= 3190) & (test_time <= 3400)
+        region_summary, _ = inspect_hidden_activations(
+            model=model,
+            X=model_data["test"]["X_scaled"][flat_region],
+            time=test_time[flat_region],
+        )
+        results["activation_diagnostics"][model_name]["historical_region_3190_3400"] = region_summary
+
+    # Keep the original predictions and relevance arrays as well as JSON summaries.
+    intervention_results = [
+        ("normal", shortcut_outputs, shortcut_relevances),
+        ("zeroed", zeroed_short_outputs, zeroed_short_relevances),
+        ("noise", noise_short_outputs, noise_short_relevances),
+        ("reversed", reversed_short_outputs, reversed_short_relevances),
+        ("permuted", permuted_short_outputs, permuted_short_relevances),
+    ]
+    for condition, output, relevance in intervention_results:
+        raw_arrays[f"shortcut_test_{condition}_prediction"] = output.cpu().numpy()
+        raw_arrays[f"shortcut_test_{condition}_relevance"] = relevance.cpu().numpy()
+    raw_arrays["baseline_test_relevance"] = relevances.cpu().numpy()
+
+    # **raw_arrays saves each dictionary entry as a named array inside one NPZ file.
+    raw_path = artifact_dir / f"forward_and_relevance_{activation}.npz"
+    np.savez_compressed(raw_path, **raw_arrays)
+    results["activation_diagnostics"]["raw_arrays"] = raw_path.relative_to(project_root).as_posix()
+
+    # Record the rules actually selected by Zennit for this model's modules.
+    composite = EpsilonPlus(epsilon=1e-6)
+    layer_rules = []
+    for name, module in mlp_shortcut_model.network.named_children():
+        rule = composite.module_map({}, name, module)
+        layer_rules.append({"module": type(module).__name__, "rule": type(rule).__name__})
+    results["models"]["mlp"]["attribution_rules"] = {
+        "epsilon": 1e-6,
+        "output_seed": "ones_like",
+        "layers": layer_rules,
+    }
+
+    # Plot predictions, zero hidden outputs, and raw relevance on the same time axis.
+    diagnostic_fig = plot_activation_diagnostics(
+        arrays=test_shortcut_arrays,
+        relevance=shortcut_relevances.cpu().numpy(),
+        target=processed_shortcut_data["test"]["y"],
+        title=f"{activation_label}: shortcut activation diagnostics",
+    )
+    diagnostic_path = save_plot(
+        diagnostic_fig,
+        subdir="activation diagnostics",
+        filename=f"activation_diagnostics_{run_id}.png",
+    )
+
     baseline_comparison_fig, _ = plot_model_comparison(
         processed_data,
         lin_predictions,
@@ -471,6 +627,7 @@ def main():
         baseline_comparison_fig,
         subdir="model comparisons",
         filename=f"compare_baseline_{run_id}.png",
+        activation=activation_label,
     )
 
     shortcut_comparison_fig, _ = plot_model_comparison(
@@ -486,6 +643,7 @@ def main():
         shortcut_comparison_fig,
         subdir="model comparisons",
         filename=f"compare_shortcut_{run_id}.png",
+        activation=activation_label,
     )
 
     baseline_heatmap_fig, _ = plot_lrp_relevance_heatmap(  # Default heatmap
@@ -498,6 +656,7 @@ def main():
         baseline_heatmap_fig,
         subdir="lrp heatmaps",
         filename=f"lrp_heatmap_baseline_{run_id}.png",
+        activation=activation_label,
     )
 
     shortcut_heatmap_fig, _ = plot_lrp_relevance_heatmap(  # Shortcut heatmap
@@ -510,6 +669,7 @@ def main():
         shortcut_heatmap_fig,
         subdir="lrp heatmaps",
         filename=f"lrp_heatmap_shortcut_{run_id}.png",
+        activation=activation_label,
     )
 
     baseline_line_fig, _ = plot_lrp_relevance_lines(   # Default line map
@@ -523,6 +683,7 @@ def main():
         baseline_line_fig,
         subdir="lrp line maps",
         filename=f"lrp_line_baseline_{run_id}.png",
+        activation=activation_label,
     )
 
     shortcut_line_fig, _ = plot_lrp_relevance_lines(   # Shortcut line map
@@ -536,6 +697,7 @@ def main():
         shortcut_line_fig,
         subdir="lrp line maps",
         filename=f"lrp_line_shortcut_{run_id}.png",
+        activation=activation_label,
     )
 
     shortcut_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Prediction v. Relevance scatter for shortcut model
@@ -551,6 +713,7 @@ def main():
         shortcut_scatter_fig,
         subdir="lrp shortcut scatters",
         filename=f"lrp_scatter_shortcut_normal_{run_id}.png",
+        activation=activation_label,
     )
 
     zeroed_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for zeroed shortcut feature
@@ -566,6 +729,7 @@ def main():
         zeroed_scatter_fig,
         subdir="lrp shortcut scatters",
         filename=f"lrp_scatter_shortcut_zeroed_{run_id}.png",
+        activation=activation_label,
     )
 
     noise_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for noise shortcut feature
@@ -581,6 +745,7 @@ def main():
         noise_scatter_fig,
         subdir="lrp shortcut scatters",
         filename=f"lrp_scatter_shortcut_noise_{run_id}.png",
+        activation=activation_label,
     )
 
     reversed_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for reversed shortcut feature
@@ -596,6 +761,7 @@ def main():
         reversed_scatter_fig,
         subdir="lrp shortcut scatters",
         filename=f"lrp_scatter_shortcut_reversed_{run_id}.png",
+        activation=activation_label,
     )
 
     permuted_scatter_fig, _ = plot_lrp_prediction_and_shortcut_relevance_scatter( # Scatter for permuted shortcut feature
@@ -611,32 +777,40 @@ def main():
         permuted_scatter_fig,
         subdir="lrp shortcut scatters",
         filename=f"lrp_scatter_shortcut_permuted_{run_id}.png",
+        activation=activation_label,
     )
 
+    # Relative paths also work when the repository is opened on another computer.
     results["plots"] = {
+        "activation_diagnostics": diagnostic_path.relative_to(project_root).as_posix(),
         "model_comparison": {
-            "baseline": str(baseline_comparison_path),
-            "shortcut": str(shortcut_comparison_path),
+            "baseline": baseline_comparison_path.relative_to(project_root).as_posix(),
+            "shortcut": shortcut_comparison_path.relative_to(project_root).as_posix(),
         },
         "lrp_heatmaps": {
-            "baseline": str(baseline_heatmap_path),
-            "shortcut": str(shortcut_heatmap_path),
+            "baseline": baseline_heatmap_path.relative_to(project_root).as_posix(),
+            "shortcut": shortcut_heatmap_path.relative_to(project_root).as_posix(),
         },
         "lrp_line_maps": {
-            "baseline": str(baseline_line_path),
-            "shortcut": str(shortcut_line_path),
+            "baseline": baseline_line_path.relative_to(project_root).as_posix(),
+            "shortcut": shortcut_line_path.relative_to(project_root).as_posix(),
         },
         "lrp_shortcut_scatters": {
-            "normal": str(shortcut_scatter_path),
-            "zeroed": str(zeroed_scatter_path),
-            "noise": str(noise_scatter_path),
-            "reversed": str(reversed_scatter_path),
-            "permuted": str(permuted_scatter_path),
+            "normal": shortcut_scatter_path.relative_to(project_root).as_posix(),
+            "zeroed": zeroed_scatter_path.relative_to(project_root).as_posix(),
+            "noise": noise_scatter_path.relative_to(project_root).as_posix(),
+            "reversed": reversed_scatter_path.relative_to(project_root).as_posix(),
+            "permuted": permuted_scatter_path.relative_to(project_root).as_posix(),
         },
     }
 
-    save_results(results=results, filename=f"model_comparison_{run_id}.json")
-    plt.show()
+    output_path = save_results(results=results, filename=f"model_comparison_{run_id}.json")
+    print(f"Saved {activation_label} results: {output_path}")
+    plt.close("all")
 
 if __name__ == "__main__":
-    main()
+    # Example: --activation lgsigmoid runs LogSigmoid and labels its saved outputs.
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--activation", choices=("relu", "lgsigmoid", "gelu"), default="gelu")
+    args = parser.parse_args()
+    main(activation=args.activation)

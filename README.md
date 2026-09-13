@@ -1,146 +1,84 @@
 # xai-mini-research
 
-A holiday project created for the purpose of testing learned XAI methods and evaluating them against time series regression.
+An introductory controlled study of shortcut reliance in synthetic temporal regression. Linear regression, RBF kernel ridge regression, and a small MLP are evaluated on clean inputs and inputs augmented with a deliberately leaked polynomial feature. Zennit LRP explanations and feature interventions help investigate the MLP's dependence on that shortcut.
 
-# Evaluation of XAI Methods in Time Series Regression Models
+The saved experiments show that a useful-looking shortcut can fail severely during extrapolation, and that changing the shortcut substantially changes predictions. The study is a small research-learning project; its findings are limited to the tested synthetic conditions.
 
-This project implements a simple regression model trained on synthetic data including explainable AI methods for the purpose of evaluating the effectiveness of current XAI methods. Optionally, clustering analysis inspired by SpRAy will also be evaluated to see if spurious correlations or Clever Hans behavior can be correctly recognized [Lapuschkin et al., 2019].
+## Start here
 
-## Project Structure
+- [Methods, architecture, and results summary](reports/Final_Report.md): experiment design, numerical findings, limitations, and selected evidence.
+- [Research logs](reports/research_logs.md): dated implementation notes and evolving interpretations.
+- [Saved results](results/): metrics, relevance summaries, and figure paths for individual runs.
+- **Formal report:** the author will write this separately in Overleaf using LaTeX. Links to its source and PDF will be added when available.
 
-```text
-xai-mini-research/
-|-- configs/
-|   `-- default.yaml              # Default experiment configuration
-|-- reports/                      # Research logs and generated figures
-|   |-- model comparisons/
-|   |   |-- compare_16_08.png
-|   |   |-- compare_19_08.png
-|   |   |-- compare_22_08_base.png
-|   |   |-- compare_22_08_shortcut.png
-|   |   |-- compare_baseline_<timestamp>.png
-|   |   `-- compare_shortcut_<timestamp>.png
-|   |-- lrp heatmaps/
-|   |   |-- lrp_base_29_08_final.png
-|   |   |-- lrp_short_29_08_final.png
-|   |   |-- lrp_heatmap_baseline_<timestamp>.png
-|   |   `-- lrp_heatmap_shortcut_<timestamp>.png
-|   |-- lrp line maps/
-|   |   |-- lrp_line_base_29_08.png
-|   |   |-- lrp_line_short_29_08.png
-|   |   |-- lrp_line_baseline_<timestamp>.png
-|   |   `-- lrp_line_shortcut_<timestamp>.png
-|   |-- lrp shortcut scatters/
-|   |   |-- lrp_short_scatter_29_08.png
-|   |   |-- lrp_scatter_shortcut_normal_<timestamp>.png
-|   |   |-- lrp_scatter_shortcut_zeroed_<timestamp>.png
-|   |   |-- lrp_scatter_shortcut_noise_<timestamp>.png
-|   |   |-- lrp_scatter_shortcut_reversed_<timestamp>.png
-|   |   `-- lrp_scatter_shortcut_permuted_<timestamp>.png
-|   |-- log_02_09_2026.md
-|   |-- log_05_08_2026.md
-|   |-- log_08_08_2026.md
-|   |-- log_12_08_2026.md
-|   |-- log_16_08_2026.md
-|   |-- log_19_08_2026.md
-|   |-- log_22_08_2026.md
-|   |-- log_26_08_2026.md
-|   |-- log_29_08_2026.md
-|   `-- research_logs.md
-|-- results/                      # Saved experiment metrics, LRP summaries, and plot paths
-|   `-- model_comparison_<timestamp>.json
-|-- src/
-|   `-- xai_mini_research/
-|       |-- __init__.py
-|       |-- config.py             # Config loading helpers
-|       |-- data.py               # Synthetic time-series data generation
-|       |-- explain.py            # LRP attribution and relevance summary helpers
-|       |-- interventions.py      # Shortcut intervention helpers
-|       |-- metrics.py            # Regression metric helpers
-|       |-- preprocessing.py      # Feature scaling helpers
-|       |-- results.py            # JSON result-saving helper
-|       |-- experiments/
-|       |   |-- __init__.py
-|       |   `-- compare_models.py # Model, LRP, and intervention comparison script
-|       `-- models/
-|           |-- __init__.py
-|           |-- krr.py            # Kernel ridge regression model helpers
-|           |-- linear.py         # Linear regression model helpers
-|           `-- mlp.py            # PyTorch MLP model and training helpers
-|-- tests/
-|   |-- test_data.py
-|   |-- test_initial.py
-|   |-- test_interventions.py
-|   |-- test_krr.py
-|   |-- test_linear.py
-|   |-- test_metrics.py
-|   |-- test_mlp.py
-|   `-- test_preprocessing.py
-|-- pytest.ini
-|-- requirements.txt
-|-- LICENSE
-`-- README.md
-```
+The core experiment and a comparison of ReLU, LogSigmoid, and GELU have saved results. Direct hidden-layer measurements explain the ReLU shortcut model's flat prediction region in the selected run. The [summary](reports/Final_Report.md#checking-the-relu-flatline) distinguishes this regional inactivity from claims about permanently inactive neurons or general activation benefits.
 
-## Installation
+## Setup
 
-### Clone Repository
+Clone the repository and create an environment:
 
 ```bash
 git clone https://github.com/Mellosteen/xai-mini-research.git
 cd xai-mini-research
-```
-
-### Create Virtual Environment
-
-```bash
 python -m venv venv
 ```
 
-### Activate Environment
-
-### Windows
+Activate it on macOS/Linux with `source venv/bin/activate`, or on Windows with `venv\Scripts\activate`, then install dependencies:
 
 ```bash
-venv\Scripts\activate
+python -m pip install -r requirements.txt
 ```
 
-### Linux / macOS
+For the existing local development environment, use `conda activate mini-holiday` instead of creating a new environment.
+
+## Run the current experiment
+
+From the repository root with the environment active:
 
 ```bash
-source venv/bin/activate
+# macOS / Linux
+PYTHONPATH=src python -m xai_mini_research.experiments.compare_models --activation lgsigmoid
 ```
 
-### Install Dependencies
+In Windows PowerShell:
 
-```bash
-pip install -r requirements.txt
+```powershell
+$env:PYTHONPATH = "src"
+python -m xai_mini_research.experiments.compare_models --activation lgsigmoid
 ```
 
-## Run Tests
+Choose `relu`, `lgsigmoid` (LogSigmoid), or `gelu`; omitting the option retains GELU as the default. Run the command once for each desired activation. Each call trains clean and shortcut models, selects kRR settings, evaluates MLP relevance and interventions, and measures hidden activations.
+
+Results and every figure include the activation suffix, for example `model_comparison_<timestamp>_lgsigmoid.json` and `lrp_line_shortcut_<timestamp>_lgsigmoid.png`. JSON files are saved in `results/`, figures in `reports/`, and checkpoints, scaler parameters, raw measurements, and a source snapshot in `results/artifacts_<timestamp>_<activation>/`. Figures also label the activation inside the image.
+
+The effective settings are in [compare_models.py](src/xai_mini_research/experiments/compare_models.py), with MLP defaults in [mlp.py](src/xai_mini_research/models/mlp.py). [configs/default.yaml](configs/default.yaml) is a setup placeholder and does not control this comparison. The command runs the selected activation using current settings; it does not run all three activations automatically. Saved September 13 results record the actual code and settings; older unlabelled files have incomplete provenance. See the [summary's saved-result notes](reports/Final_Report.md#saved-results-and-verification) before comparing outputs.
+
+## Run tests
+
+With the environment active, from the repository root:
 
 ```bash
-pytest
+python -m pytest -q
+```
+
+The suite checks data generation, splitting, preprocessing, models, metrics, explanations, and interventions. Passing implementation tests does not establish statistical robustness or explanation faithfulness.
+
+## Repository layout
+
+```text
+src/xai_mini_research/
+  data.py, preprocessing.py       Synthetic data, shortcut, and scaling
+  models/                        Linear regression, kRR, and MLP
+  explain.py, interventions.py    Relevance and shortcut interventions
+  diagnostics.py                 Hidden activation measurements and plots
+  experiments/compare_models.py  Experiment settings, evaluation, and plots
+  metrics.py, results.py          Metrics and JSON output
+reports/                         Technical summary, research logs, and figures
+results/                         Timestamped experiment records
+configs/                         Setup configuration placeholder
+tests/                           Implementation tests
 ```
 
 ## Author
- - Austin Samuel Qiu
 
-## References
-
-- Lapuschkin, S., Wäldchen, S., Binder, A., Montavon, G., Samek, W.,
-  and Müller, K.-R. (2019). *Unmasking Clever Hans predictors and assessing
-  what machines really learn*. Nature Communications, 10, 1096.
-  https://doi.org/10.1038/s41467-019-08987-4
-
-- Bach, S., Binder, A., Montavon, G., Klauschen, F., Müller, K.-R.,
-  and Samek, W. (2015). *On pixel-wise explanations for non-linear
-  classifier decisions by layer-wise relevance propagation*.
-  PLOS ONE, 10(7), e0130140.
-  https://doi.org/10.1371/journal.pone.0130140
-
-- Yassen, M.A., El-Kenawy, ES.M., Abdel-Fattah, M.G. et al.
-  Explainable artificial intelligence for wind power forecasting
-  model based on long short-term memory. Neural Comput & Applic 37,
-  14589–14611 (2025).
-  https://doi.org/10.1007/s00521-025-11230-5
+Austin Samuel Qiu

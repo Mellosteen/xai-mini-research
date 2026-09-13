@@ -1,0 +1,1488 @@
+{
+    "provenance": {
+        "run_id": "2026_09_13_15_46_44_relu",
+        "activation": "ReLU",
+        "activation_slug": "relu",
+        "git_commit": "e73c793b0aff73d3196f3dcf31e289e1b63d80af",
+        "working_tree_dirty": true,
+        "git_status_at_start": [
+            "M README.md",
+            " M src/xai_mini_research/experiments/compare_models.py",
+            " M src/xai_mini_research/models/mlp.py",
+            "?? reports/Final_Report.md",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp line maps/lrp_line_shortcut_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_08_07_42_57.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_00_11.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_09_10_02_17.png\"",
+            "?? \"reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_baseline_2026_09_10_08_32_06.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_08_07_42_57.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_00_11.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_09_10_02_17.png\"",
+            "?? \"reports/model comparisons/compare_shortcut_2026_09_10_08_32_06.png\"",
+            "?? results/artifacts_2026_09_13_15_46_44_relu/",
+            "?? results/model_comparison_2026_09_08_07_42_57.json",
+            "?? results/model_comparison_2026_09_09_10_00_11.json",
+            "?? results/model_comparison_2026_09_09_10_02_17.json",
+            "?? results/model_comparison_2026_09_10_08_32_06.json",
+            "?? src/xai_mini_research/diagnostics.py",
+            "?? tests/test_activation_diagnostics.py"
+        ],
+        "source_sha256": {
+            "src/xai_mini_research/__init__.py": "52e627b83655f374287188faf071fbf61d3d7b84bb5249513c5f2d85b0ee21ea",
+            "src/xai_mini_research/config.py": "4e521273459bee94e3ce5c9de3e02cd15bffbd0607e2d1f833e2a5d90c20f4e1",
+            "src/xai_mini_research/data.py": "81fc057f541b5d8e465f1223479d5ebc2795fef8ff27836ff61c455a66b3d15b",
+            "src/xai_mini_research/diagnostics.py": "ef5a6d2a708bb886498788baa278da9dad8c0f2ab4f8514837ac71dfd3106fcb",
+            "src/xai_mini_research/experiments/__init__.py": "31f5661b3e5a88f6b898bb8e51e016906e47b9e8c7cccec716e8175d3028701f",
+            "src/xai_mini_research/experiments/compare_models.py": "67c4bba0fca66f8be08ec4decb2b6047b8c54e6637a5586f63ead2307afb40c0",
+            "src/xai_mini_research/explain.py": "e097cb49f52460482ab90eae9ad3dd70a6f20a6ecff8dd7a80da60f71ba74878",
+            "src/xai_mini_research/interventions.py": "9daeb3f76aa68271d801dfb3c5c076ced6ef1baa26175ca9ea6aeded88f9a51a",
+            "src/xai_mini_research/metrics.py": "4cb3bb89b702a1c4555701e9383dce260c6e804cc6a5dc7e054a1056d060d052",
+            "src/xai_mini_research/models/__init__.py": "6be10a5c09af1c6324cfd9dc42d2aee4ab9638bc41aa74ad8005a03b2e309f1b",
+            "src/xai_mini_research/models/krr.py": "1126c114fa1ea3b020ca2bce543eef17f342cf314d93514decd307da4943a50b",
+            "src/xai_mini_research/models/linear.py": "00adf9bc32e5a8dc9644d50f927394ddb1afd1787aba83cff9bdb7ea33cfb840",
+            "src/xai_mini_research/models/mlp.py": "ed60c358c9b942e7e32b13dc4db669e52369f5aee949c442e4b1100c8c0e4ebf",
+            "src/xai_mini_research/preprocessing.py": "9a2cbcf85cbd7ecf0fa13f2b73c1e475c40c471e9cec524c59e974120b6d36c7",
+            "src/xai_mini_research/results.py": "db14cfd344a39ce2eae5f8bc33e66fb870991da05407b4c9772c76f1a8c2a8ab",
+            "requirements.txt": "12ecd54cbbca0aeea5a584f67fad5092d08d327f9c6600c7706ff2202e64dff0",
+            "configs/default.yaml": "fbc1023bbf96838ef06e782d9a4f80fde1b341702b91a15f1ce63a3cde8ed995"
+        },
+        "source_archive": "results/artifacts_2026_09_13_15_46_44_relu/source.zip",
+        "versions": {
+            "torch": "2.13.0",
+            "numpy": "2.5.1",
+            "scikit-learn": "1.9.0",
+            "zennit": "1.0.0",
+            "matplotlib": "3.11.1"
+        },
+        "device": "cpu",
+        "torch_num_threads": 4,
+        "command": "PYTHONPATH=src python -m xai_mini_research.experiments.compare_models --activation relu"
+    },
+    "time_data": {
+        "n_samples": 3650,
+        "noise_level": 0.05,
+        "training_ratio": 0.7,
+        "val_ratio": 0.15,
+        "test_ratio": 0.15,
+        "data_seed": 42,
+        "shortcut": true,
+        "shortcut_fit_split": "train_val",
+        "shortcut_deg": 20
+    },
+    "models": {
+        "linear_regression": {
+            "metrics": {
+                "train": {
+                    "mae": 1.0096916544113133,
+                    "rmse": 1.293353101320676,
+                    "r2": 0.992781607786372
+                },
+                "val": {
+                    "mae": 2.5110545746011215,
+                    "rmse": 2.7966586748573037,
+                    "r2": 0.7497267768320507
+                },
+                "test": {
+                    "mae": 3.2841546571167113,
+                    "rmse": 3.676044010079359,
+                    "r2": 0.6917521658893317
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 1.018802611004886,
+                    "rmse": 1.2919878193783418,
+                    "r2": 0.9927968394178863
+                },
+                "val": {
+                    "mae": 2.2635480659935987,
+                    "rmse": 2.5168282862538938,
+                    "r2": 0.7973051897837571
+                },
+                "test": {
+                    "mae": 12219.628665962855,
+                    "rmse": 28532.680544809362,
+                    "r2": -18570506.712731756
+                }
+            }
+        },
+        "kernel_rr": {
+            "params": {
+                "alpha": 0.001,
+                "gamma": 0.001
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.0667229999023759,
+                    "rmse": 0.08477434884922382,
+                    "r2": 0.9999689876138043
+                },
+                "val": {
+                    "mae": 0.130172300792941,
+                    "rmse": 0.172740283718569,
+                    "r2": 0.9990451773475195
+                },
+                "test": {
+                    "mae": 0.4961809900601458,
+                    "rmse": 0.5798898894354125,
+                    "r2": 0.9923293935220656
+                }
+            },
+            "shortcut_params": {
+                "alpha": 0.005,
+                "gamma": 0.001
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.1820060877583984,
+                    "rmse": 0.21602434472995843,
+                    "r2": 0.9997986221725516
+                },
+                "val": {
+                    "mae": 0.16518642382544962,
+                    "rmse": 0.19969103004678204,
+                    "r2": 0.9987239944276418
+                },
+                "test": {
+                    "mae": 59.52533509531257,
+                    "rmse": 63.616731507881426,
+                    "r2": -91.31692579741842
+                }
+            }
+        },
+        "mlp": {
+            "params": {
+                "activation": "ReLU",
+                "hidden_dimensions": [
+                    8,
+                    4
+                ],
+                "batch_size": 32,
+                "optimizer": "Adam",
+                "optimizer_defaults": {
+                    "lr": 0.01,
+                    "betas": [
+                        0.9,
+                        0.999
+                    ],
+                    "eps": 1e-08,
+                    "weight_decay": 0,
+                    "amsgrad": false,
+                    "maximize": false,
+                    "foreach": null,
+                    "capturable": false,
+                    "differentiable": false,
+                    "fused": null,
+                    "decoupled_weight_decay": false
+                },
+                "loss": "MSELoss",
+                "min_delta": 0.0001,
+                "learning_rate": 0.01,
+                "epochs": 50,
+                "patience": 5,
+                "seed": 42
+            },
+            "metrics": {
+                "train": {
+                    "mae": 0.27749818434697293,
+                    "rmse": 0.49525323856677766,
+                    "r2": 0.9989415730082277
+                },
+                "val": {
+                    "mae": 0.8791193798807345,
+                    "rmse": 1.0108734265111285,
+                    "r2": 0.9673014106728672
+                },
+                "test": {
+                    "mae": 1.6890096029481017,
+                    "rmse": 1.9100972975253896,
+                    "r2": 0.9167758037407411
+                }
+            },
+            "shortcut_metrics": {
+                "train": {
+                    "mae": 0.7489082901195395,
+                    "rmse": 0.9229738483721626,
+                    "r2": 0.9963239191880481
+                },
+                "val": {
+                    "mae": 0.777276446657034,
+                    "rmse": 0.9532073393521117,
+                    "r2": 0.9709256367703086
+                },
+                "test": {
+                    "mae": 85347.71749676809,
+                    "rmse": 200119.57478520236,
+                    "r2": -913519393.7794294
+                }
+            },
+            "lrp": {
+                "baseline": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality"
+                    ],
+                    "output_mean": 68.8228530883789,
+                    "output_std": 4.985162258148193,
+                    "total_mean_abs_relevance": 0.6634480953216553,
+                    "shortcut_relevance_share": null,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.2860499620437622,
+                            "mean_signed_relevance": 0.2860499620437622,
+                            "relevance_share": 0.4311565160751343
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.3248920440673828,
+                            "mean_signed_relevance": 0.3248920440673828,
+                            "relevance_share": 0.4897022843360901
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.05250606685876846,
+                            "mean_signed_relevance": 0.014043832197785378,
+                            "relevance_share": 0.07914118468761444
+                        }
+                    }
+                },
+                "shortcut": {
+                    "method": "zennit_lrp_epsilon_plus",
+                    "split": "test",
+                    "condition": "normal",
+                    "epsilon": 1e-06,
+                    "n_samples": 548,
+                    "feature_names": [
+                        "time",
+                        "f_linear",
+                        "annual_seasonality",
+                        "shortcut_polynomial"
+                    ],
+                    "output_mean": 85358.078125,
+                    "output_std": 181038.5,
+                    "total_mean_abs_relevance": 0.9413766860961914,
+                    "shortcut_relevance_share": 0.760447084903717,
+                    "by_feature": {
+                        "time": {
+                            "mean_abs_relevance": 0.128164142370224,
+                            "mean_signed_relevance": 0.128164142370224,
+                            "relevance_share": 0.1361454427242279
+                        },
+                        "f_linear": {
+                            "mean_abs_relevance": 0.07632958889007568,
+                            "mean_signed_relevance": 0.07632958889007568,
+                            "relevance_share": 0.08108294010162354
+                        },
+                        "annual_seasonality": {
+                            "mean_abs_relevance": 0.021015789359807968,
+                            "mean_signed_relevance": 0.02046552300453186,
+                            "relevance_share": 0.02232452668249607
+                        },
+                        "shortcut_polynomial": {
+                            "mean_abs_relevance": 0.7158671617507935,
+                            "mean_signed_relevance": 0.19660598039627075,
+                            "relevance_share": 0.760447084903717
+                        }
+                    }
+                }
+            },
+            "interventions": {
+                "target_model": "shortcut_mlp",
+                "split": "test",
+                "feature_space": "scaled",
+                "changed_feature": "shortcut_polynomial",
+                "conditions": {
+                    "normal": {
+                        "metrics": {
+                            "mae": 85347.71749676809,
+                            "rmse": 200119.57478520236,
+                            "r2": -913519393.7794294
+                        },
+                        "shortcut_relevance_share": 0.760447084903717,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "normal",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 85358.078125,
+                            "output_std": 181038.5,
+                            "total_mean_abs_relevance": 0.9413766860961914,
+                            "shortcut_relevance_share": 0.760447084903717,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.128164142370224,
+                                    "mean_signed_relevance": 0.128164142370224,
+                                    "relevance_share": 0.1361454427242279
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.07632958889007568,
+                                    "mean_signed_relevance": 0.07632958889007568,
+                                    "relevance_share": 0.08108294010162354
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.021015789359807968,
+                                    "mean_signed_relevance": 0.02046552300453186,
+                                    "relevance_share": 0.02232452668249607
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.7158671617507935,
+                                    "mean_signed_relevance": 0.19660598039627075,
+                                    "relevance_share": 0.760447084903717
+                                }
+                            }
+                        }
+                    },
+                    "zeroed": {
+                        "metrics": {
+                            "mae": 15.779427635078616,
+                            "rmse": 15.942689624480037,
+                            "r2": -4.797781069130147
+                        },
+                        "shortcut_relevance_share": 0.0,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "zeroed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 53.516483306884766,
+                            "output_std": 4.38978910446167,
+                            "total_mean_abs_relevance": 0.5988858342170715,
+                            "shortcut_relevance_share": 0.0,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.33379852771759033,
+                                    "mean_signed_relevance": 0.33379852771759033,
+                                    "relevance_share": 0.557365894317627
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.20665055513381958,
+                                    "mean_signed_relevance": 0.20665055513381958,
+                                    "relevance_share": 0.3450583517551422
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.05843672901391983,
+                                    "mean_signed_relevance": 0.04051504284143448,
+                                    "relevance_share": 0.09757573902606964
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.0,
+                                    "mean_signed_relevance": 0.0,
+                                    "relevance_share": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "noise": {
+                        "metrics": {
+                            "mae": 15.736605707164383,
+                            "rmse": 16.842720925962375,
+                            "r2": -5.470876851845019
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.12165247648954391,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "noise",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 53.60956954956055,
+                            "output_std": 6.941356182098389,
+                            "total_mean_abs_relevance": 0.6810436248779297,
+                            "shortcut_relevance_share": 0.12165247648954391,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.33468812704086304,
+                                    "mean_signed_relevance": 0.33468812704086304,
+                                    "relevance_share": 0.4914341866970062
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.2057335376739502,
+                                    "mean_signed_relevance": 0.2057335376739502,
+                                    "relevance_share": 0.3020856976509094
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.057771313935518265,
+                                    "mean_signed_relevance": 0.03686822950839996,
+                                    "relevance_share": 0.08482762426137924
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.08285064250230789,
+                                    "mean_signed_relevance": -0.005624758545309305,
+                                    "relevance_share": 0.12165247648954391
+                                }
+                            }
+                        }
+                    },
+                    "reversed": {
+                        "metrics": {
+                            "mae": 401.4865427103615,
+                            "rmse": 685.3291462001671,
+                            "r2": -10712.63962263383
+                        },
+                        "shortcut_relevance_share": 0.8090706467628479,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "reversed",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 401.77838134765625,
+                            "output_std": 594.8700561523438,
+                            "total_mean_abs_relevance": 0.5048642754554749,
+                            "shortcut_relevance_share": 0.8090706467628479,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.05390090495347977,
+                                    "mean_signed_relevance": 0.05390090495347977,
+                                    "relevance_share": 0.10676316171884537
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.03342980891466141,
+                                    "mean_signed_relevance": 0.03342980891466141,
+                                    "relevance_share": 0.06621544063091278
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.009062713012099266,
+                                    "mean_signed_relevance": 0.007910309359431267,
+                                    "relevance_share": 0.017950790002942085
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.40847086906433105,
+                                    "mean_signed_relevance": 0.3808339536190033,
+                                    "relevance_share": 0.8090706467628479
+                                }
+                            }
+                        }
+                    },
+                    "permuted": {
+                        "metrics": {
+                            "mae": 85350.16270293147,
+                            "rmse": 200121.0511764903,
+                            "r2": -913532872.8911289
+                        },
+                        "seed": 42,
+                        "shortcut_relevance_share": 0.7360216379165649,
+                        "lrp": {
+                            "method": "zennit_lrp_epsilon_plus",
+                            "split": "test",
+                            "condition": "permuted",
+                            "epsilon": 1e-06,
+                            "n_samples": 548,
+                            "feature_names": [
+                                "time",
+                                "f_linear",
+                                "annual_seasonality",
+                                "shortcut_polynomial"
+                            ],
+                            "output_mean": 85357.25,
+                            "output_std": 181036.84375,
+                            "total_mean_abs_relevance": 1.1079800128936768,
+                            "shortcut_relevance_share": 0.7360216379165649,
+                            "by_feature": {
+                                "time": {
+                                    "mean_abs_relevance": 0.16122615337371826,
+                                    "mean_signed_relevance": 0.16122615337371826,
+                                    "relevance_share": 0.1455135941505432
+                                },
+                                "f_linear": {
+                                    "mean_abs_relevance": 0.11183354258537292,
+                                    "mean_signed_relevance": 0.11133252084255219,
+                                    "relevance_share": 0.10093461722135544
+                                },
+                                "annual_seasonality": {
+                                    "mean_abs_relevance": 0.019423101097345352,
+                                    "mean_signed_relevance": 0.016342205926775932,
+                                    "relevance_share": 0.01753019168972969
+                                },
+                                "shortcut_polynomial": {
+                                    "mean_abs_relevance": 0.8154972791671753,
+                                    "mean_signed_relevance": 0.09820375591516495,
+                                    "relevance_share": 0.7360216379165649
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "training": {
+                "baseline": {
+                    "completed_epochs": 23,
+                    "train_losses": [
+                        602.9135021082809,
+                        26.238285908633717,
+                        9.142443525534553,
+                        5.366937629863941,
+                        3.590119147254063,
+                        2.6788043354821998,
+                        2.0580493120764567,
+                        1.6458770011035897,
+                        1.3411240008945802,
+                        1.0794638376179972,
+                        0.8632506382208748,
+                        0.6903490847570789,
+                        0.5520240754763908,
+                        0.451553143954557,
+                        0.38389501059154474,
+                        0.33591048586858463,
+                        0.2961634044077998,
+                        0.26057649817018824,
+                        0.2303334082613486,
+                        0.20674187273895203,
+                        0.18138546665470662,
+                        0.16219279836068648,
+                        0.1447394036864698
+                    ],
+                    "val_losses": [
+                        21.361324924001746,
+                        63.32206896933603,
+                        25.144527278391056,
+                        21.02259987756147,
+                        15.990107510163972,
+                        13.278940545139626,
+                        8.000776602537584,
+                        7.946829678153643,
+                        7.002699518116562,
+                        5.683511400135605,
+                        3.9262908350615007,
+                        3.154227564278207,
+                        2.53169801553381,
+                        1.787691247474123,
+                        1.652966907571395,
+                        1.3589559444915877,
+                        1.4963076615287247,
+                        1.0218651190917714,
+                        1.2118465827413625,
+                        1.2695391549979094,
+                        1.117082167600692,
+                        1.3704995797909592,
+                        1.0824738740103772
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_46_44_relu/baseline_relu.pt"
+                },
+                "shortcut": {
+                    "completed_epochs": 8,
+                    "train_losses": [
+                        579.921111646977,
+                        24.835864271809676,
+                        2.249276008298019,
+                        0.6400492153755606,
+                        0.4198203931349364,
+                        0.33443166008784114,
+                        0.3039638723820856,
+                        0.28089521535455364
+                    ],
+                    "val_losses": [
+                        200.78983073958096,
+                        18.67087895778677,
+                        0.9086043251170972,
+                        1.4323898034895577,
+                        1.0443559576513781,
+                        1.3173404825779813,
+                        1.3811139525944398,
+                        1.5245692513106728
+                    ],
+                    "checkpoint": "results/artifacts_2026_09_13_15_46_44_relu/shortcut_relu.pt"
+                }
+            },
+            "attribution_rules": {
+                "epsilon": 1e-06,
+                "output_seed": "ones_like",
+                "layers": [
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "ReLU",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    },
+                    {
+                        "module": "ReLU",
+                        "rule": "Pass"
+                    },
+                    {
+                        "module": "Linear",
+                        "rule": "Epsilon"
+                    }
+                ]
+            }
+        }
+    },
+    "activation_diagnostics": {
+        "baseline": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.4782289628180039,
+                        "exact_zero_fraction": 0.4782289628180039,
+                        "near_zero_fraction": 0.4782289628180039,
+                        "all_units_zero_row_fraction": 0.03874755381604697,
+                        "units_zero_on_all_rows": [
+                            1,
+                            3,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.08062622309197652,
+                            1.0,
+                            0.5064579256360078,
+                            1.0,
+                            0.047749510763209393,
+                            1.0,
+                            0.04892367906066536,
+                            0.14207436399217221
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.38913894324853227,
+                        "exact_zero_fraction": 0.38913894324853227,
+                        "near_zero_fraction": 0.38913894324853227,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.5565557729941292,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.0584429502487183,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.375,
+                        "exact_zero_fraction": 0.375,
+                        "near_zero_fraction": 0.375,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            1,
+                            3,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            1.0,
+                            0.0,
+                            1.0,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.25,
+                        "near_zero_fraction": 0.25,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.0584429502487183,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.34443430656934304,
+                        "exact_zero_fraction": 0.34443430656934304,
+                        "near_zero_fraction": 0.34443430656934304,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            1,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.7554744525547445,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.25,
+                        "near_zero_fraction": 0.25,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.0584429502487183,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.35959715639810425,
+                        "exact_zero_fraction": 0.35959715639810425,
+                        "near_zero_fraction": 0.35959715639810425,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            1,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.8767772511848341,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.25,
+                        "exact_zero_fraction": 0.25,
+                        "near_zero_fraction": 0.25,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 1.0584429502487183,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            }
+        },
+        "shortcut": {
+            "train": {
+                "n_samples": 2555,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.24031311154598825,
+                        "exact_zero_fraction": 0.24031311154598825,
+                        "near_zero_fraction": 0.24031311154598825,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.3592954990215264,
+                            0.2896281800391389,
+                            0.3021526418786693,
+                            0.0,
+                            0.5804305283757338,
+                            0.2273972602739726,
+                            0.0547945205479452,
+                            0.10880626223091977
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.500587084148728,
+                        "exact_zero_fraction": 0.500587084148728,
+                        "near_zero_fraction": 0.500587084148728,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0,
+                            2
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.0,
+                            1.0,
+                            0.0023483365949119373
+                        ]
+                    }
+                },
+                "output_bias": 0.5027097463607788,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "val": {
+                "n_samples": 547,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.30347349177330896,
+                        "exact_zero_fraction": 0.30347349177330896,
+                        "near_zero_fraction": 0.30347349177330896,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            4
+                        ],
+                        "zero_fraction_per_unit": [
+                            0.0,
+                            0.0,
+                            0.21389396709323583,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.6581352833638026,
+                            0.5557586837294333
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.5,
+                        "exact_zero_fraction": 0.5,
+                        "near_zero_fraction": 0.5,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0,
+                            2
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.0,
+                            1.0,
+                            0.0
+                        ]
+                    }
+                },
+                "output_bias": 0.5027097463607788,
+                "last_hidden_all_zero_times": [],
+                "prediction_equals_bias_when_last_hidden_zero": null
+            },
+            "test": {
+                "n_samples": 548,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.4546076642335766,
+                        "exact_zero_fraction": 0.4546076642335766,
+                        "near_zero_fraction": 0.4546076642335766,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [],
+                        "zero_fraction_per_unit": [
+                            0.42883211678832117,
+                            0.4416058394160584,
+                            0.35036496350364965,
+                            0.44525547445255476,
+                            0.5638686131386861,
+                            0.4416058394160584,
+                            0.5145985401459854,
+                            0.45072992700729925
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 0.6934306569343066,
+                        "exact_zero_fraction": 0.6934306569343066,
+                        "near_zero_fraction": 0.6934306569343066,
+                        "all_units_zero_row_fraction": 0.38503649635036497,
+                        "units_zero_on_all_rows": [
+                            0,
+                            2
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            0.38503649635036497,
+                            1.0,
+                            0.3886861313868613
+                        ]
+                    }
+                },
+                "output_bias": 0.5027097463607788,
+                "last_hidden_all_zero_times": [
+                    3190,
+                    3191,
+                    3192,
+                    3193,
+                    3194,
+                    3195,
+                    3196,
+                    3197,
+                    3198,
+                    3199,
+                    3200,
+                    3201,
+                    3202,
+                    3203,
+                    3204,
+                    3205,
+                    3206,
+                    3207,
+                    3208,
+                    3209,
+                    3210,
+                    3211,
+                    3212,
+                    3213,
+                    3214,
+                    3215,
+                    3216,
+                    3217,
+                    3218,
+                    3219,
+                    3220,
+                    3221,
+                    3222,
+                    3223,
+                    3224,
+                    3225,
+                    3226,
+                    3227,
+                    3228,
+                    3229,
+                    3230,
+                    3231,
+                    3232,
+                    3233,
+                    3234,
+                    3235,
+                    3236,
+                    3237,
+                    3238,
+                    3239,
+                    3240,
+                    3241,
+                    3242,
+                    3243,
+                    3244,
+                    3245,
+                    3246,
+                    3247,
+                    3248,
+                    3249,
+                    3250,
+                    3251,
+                    3252,
+                    3253,
+                    3254,
+                    3255,
+                    3256,
+                    3257,
+                    3258,
+                    3259,
+                    3260,
+                    3261,
+                    3262,
+                    3263,
+                    3264,
+                    3265,
+                    3266,
+                    3267,
+                    3268,
+                    3269,
+                    3270,
+                    3271,
+                    3272,
+                    3273,
+                    3274,
+                    3275,
+                    3276,
+                    3277,
+                    3278,
+                    3279,
+                    3280,
+                    3281,
+                    3282,
+                    3283,
+                    3284,
+                    3285,
+                    3286,
+                    3287,
+                    3288,
+                    3289,
+                    3290,
+                    3291,
+                    3292,
+                    3293,
+                    3294,
+                    3295,
+                    3296,
+                    3297,
+                    3298,
+                    3299,
+                    3300,
+                    3301,
+                    3302,
+                    3303,
+                    3304,
+                    3305,
+                    3306,
+                    3307,
+                    3308,
+                    3309,
+                    3310,
+                    3311,
+                    3312,
+                    3313,
+                    3314,
+                    3315,
+                    3316,
+                    3317,
+                    3318,
+                    3319,
+                    3320,
+                    3321,
+                    3322,
+                    3323,
+                    3324,
+                    3325,
+                    3326,
+                    3327,
+                    3328,
+                    3329,
+                    3330,
+                    3331,
+                    3332,
+                    3333,
+                    3334,
+                    3335,
+                    3336,
+                    3337,
+                    3338,
+                    3339,
+                    3340,
+                    3341,
+                    3342,
+                    3343,
+                    3344,
+                    3345,
+                    3346,
+                    3347,
+                    3348,
+                    3349,
+                    3350,
+                    3351,
+                    3352,
+                    3353,
+                    3354,
+                    3355,
+                    3356,
+                    3357,
+                    3358,
+                    3359,
+                    3360,
+                    3361,
+                    3362,
+                    3363,
+                    3364,
+                    3365,
+                    3366,
+                    3367,
+                    3368,
+                    3369,
+                    3370,
+                    3371,
+                    3372,
+                    3373,
+                    3374,
+                    3375,
+                    3376,
+                    3377,
+                    3378,
+                    3379,
+                    3380,
+                    3381,
+                    3382,
+                    3383,
+                    3384,
+                    3385,
+                    3386,
+                    3387,
+                    3388,
+                    3389,
+                    3390,
+                    3391,
+                    3392,
+                    3393,
+                    3394,
+                    3395,
+                    3396,
+                    3397,
+                    3398,
+                    3399,
+                    3400
+                ],
+                "prediction_equals_bias_when_last_hidden_zero": true
+            },
+            "historical_region_3190_3400": {
+                "n_samples": 211,
+                "near_zero_threshold": 1e-08,
+                "layers": {
+                    "layer_1": {
+                        "pre_nonpositive_fraction": 0.48755924170616116,
+                        "exact_zero_fraction": 0.48755924170616116,
+                        "near_zero_fraction": 0.48755924170616116,
+                        "all_units_zero_row_fraction": 0.0,
+                        "units_zero_on_all_rows": [
+                            0,
+                            1,
+                            5
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            1.0,
+                            0.9004739336492891,
+                            0.0,
+                            0.0,
+                            1.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "layer_2": {
+                        "pre_nonpositive_fraction": 1.0,
+                        "exact_zero_fraction": 1.0,
+                        "near_zero_fraction": 1.0,
+                        "all_units_zero_row_fraction": 1.0,
+                        "units_zero_on_all_rows": [
+                            0,
+                            1,
+                            2,
+                            3
+                        ],
+                        "zero_fraction_per_unit": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                "output_bias": 0.5027097463607788,
+                "last_hidden_all_zero_times": [
+                    3190,
+                    3191,
+                    3192,
+                    3193,
+                    3194,
+                    3195,
+                    3196,
+                    3197,
+                    3198,
+                    3199,
+                    3200,
+                    3201,
+                    3202,
+                    3203,
+                    3204,
+                    3205,
+                    3206,
+                    3207,
+                    3208,
+                    3209,
+                    3210,
+                    3211,
+                    3212,
+                    3213,
+                    3214,
+                    3215,
+                    3216,
+                    3217,
+                    3218,
+                    3219,
+                    3220,
+                    3221,
+                    3222,
+                    3223,
+                    3224,
+                    3225,
+                    3226,
+                    3227,
+                    3228,
+                    3229,
+                    3230,
+                    3231,
+                    3232,
+                    3233,
+                    3234,
+                    3235,
+                    3236,
+                    3237,
+                    3238,
+                    3239,
+                    3240,
+                    3241,
+                    3242,
+                    3243,
+                    3244,
+                    3245,
+                    3246,
+                    3247,
+                    3248,
+                    3249,
+                    3250,
+                    3251,
+                    3252,
+                    3253,
+                    3254,
+                    3255,
+                    3256,
+                    3257,
+                    3258,
+                    3259,
+                    3260,
+                    3261,
+                    3262,
+                    3263,
+                    3264,
+                    3265,
+                    3266,
+                    3267,
+                    3268,
+                    3269,
+                    3270,
+                    3271,
+                    3272,
+                    3273,
+                    3274,
+                    3275,
+                    3276,
+                    3277,
+                    3278,
+                    3279,
+                    3280,
+                    3281,
+                    3282,
+                    3283,
+                    3284,
+                    3285,
+                    3286,
+                    3287,
+                    3288,
+                    3289,
+                    3290,
+                    3291,
+                    3292,
+                    3293,
+                    3294,
+                    3295,
+                    3296,
+                    3297,
+                    3298,
+                    3299,
+                    3300,
+                    3301,
+                    3302,
+                    3303,
+                    3304,
+                    3305,
+                    3306,
+                    3307,
+                    3308,
+                    3309,
+                    3310,
+                    3311,
+                    3312,
+                    3313,
+                    3314,
+                    3315,
+                    3316,
+                    3317,
+                    3318,
+                    3319,
+                    3320,
+                    3321,
+                    3322,
+                    3323,
+                    3324,
+                    3325,
+                    3326,
+                    3327,
+                    3328,
+                    3329,
+                    3330,
+                    3331,
+                    3332,
+                    3333,
+                    3334,
+                    3335,
+                    3336,
+                    3337,
+                    3338,
+                    3339,
+                    3340,
+                    3341,
+                    3342,
+                    3343,
+                    3344,
+                    3345,
+                    3346,
+                    3347,
+                    3348,
+                    3349,
+                    3350,
+                    3351,
+                    3352,
+                    3353,
+                    3354,
+                    3355,
+                    3356,
+                    3357,
+                    3358,
+                    3359,
+                    3360,
+                    3361,
+                    3362,
+                    3363,
+                    3364,
+                    3365,
+                    3366,
+                    3367,
+                    3368,
+                    3369,
+                    3370,
+                    3371,
+                    3372,
+                    3373,
+                    3374,
+                    3375,
+                    3376,
+                    3377,
+                    3378,
+                    3379,
+                    3380,
+                    3381,
+                    3382,
+                    3383,
+                    3384,
+                    3385,
+                    3386,
+                    3387,
+                    3388,
+                    3389,
+                    3390,
+                    3391,
+                    3392,
+                    3393,
+                    3394,
+                    3395,
+                    3396,
+                    3397,
+                    3398,
+                    3399,
+                    3400
+                ],
+                "prediction_equals_bias_when_last_hidden_zero": true
+            }
+        },
+        "raw_arrays": "results/artifacts_2026_09_13_15_46_44_relu/forward_and_relevance_relu.npz"
+    },
+    "plots": {
+        "activation_diagnostics": "reports/activation diagnostics/activation_diagnostics_2026_09_13_15_46_44_relu.png",
+        "model_comparison": {
+            "baseline": "reports/model comparisons/compare_baseline_2026_09_13_15_46_44_relu.png",
+            "shortcut": "reports/model comparisons/compare_shortcut_2026_09_13_15_46_44_relu.png"
+        },
+        "lrp_heatmaps": {
+            "baseline": "reports/lrp heatmaps/lrp_heatmap_baseline_2026_09_13_15_46_44_relu.png",
+            "shortcut": "reports/lrp heatmaps/lrp_heatmap_shortcut_2026_09_13_15_46_44_relu.png"
+        },
+        "lrp_line_maps": {
+            "baseline": "reports/lrp line maps/lrp_line_baseline_2026_09_13_15_46_44_relu.png",
+            "shortcut": "reports/lrp line maps/lrp_line_shortcut_2026_09_13_15_46_44_relu.png"
+        },
+        "lrp_shortcut_scatters": {
+            "normal": "reports/lrp shortcut scatters/lrp_scatter_shortcut_normal_2026_09_13_15_46_44_relu.png",
+            "zeroed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_zeroed_2026_09_13_15_46_44_relu.png",
+            "noise": "reports/lrp shortcut scatters/lrp_scatter_shortcut_noise_2026_09_13_15_46_44_relu.png",
+            "reversed": "reports/lrp shortcut scatters/lrp_scatter_shortcut_reversed_2026_09_13_15_46_44_relu.png",
+            "permuted": "reports/lrp shortcut scatters/lrp_scatter_shortcut_permuted_2026_09_13_15_46_44_relu.png"
+        }
+    }
+}
